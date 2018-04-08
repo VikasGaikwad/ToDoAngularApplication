@@ -1,0 +1,28 @@
+<!-- 
+<h2>Login Form</h2>
+<input type="text" name="email" placeholder="enter email id">
+<input type="password" name="password" placeholder="enter password">
+<input type="submit" value="login"> -->
+<h2>Login Form</h2>
+<div class="loginContainer">
+  <mat-form-field>
+    <input  matInput placeholder="username" >
+    <!-- <input placeholder="username" matInput [formControl]="email" required> -->
+    <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+  </mat-form-field>
+</div>
+
+<div class="loginContainer">
+  <mat-form-field>
+    <input type="password" matInput placeholder="password">
+  </mat-form-field>
+</div>
+
+<div class="loginContainer">
+  <!-- <a mat-button routerLink=".">Login</a> -->
+  <button mat-raised-button color="primary">Login</button>
+</div>
+
+<div>
+  <a href="forgot">forget password</a>
+</div>

@@ -1,0 +1,17 @@
+.registercontainer {
+    display: flex;   
+    width: 200px;
+ margin: auto;
+ width: 100%;
+ margin: 0%;
+
+    
+  }
+  .registercontainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  h2{
+    color: rgb(6, 149, 245);
+  }

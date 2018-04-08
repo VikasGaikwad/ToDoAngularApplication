@@ -1,0 +1,27 @@
+.loginContainer {
+    display: flex;   
+    width: 200px;
+ margin: auto;
+ width: 100%;
+ margin: 0%;
+ display: flex;
+ align-items: center;
+ justify-content: space-around;
+    
+  }
+  
+  a{
+    text-decoration: none;
+    
+  }
+  h2{
+    color: rgb(6, 149, 245);
+  }
+  /* .loginContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .loginContainer > * {
+    width: 100%;
+  } */
