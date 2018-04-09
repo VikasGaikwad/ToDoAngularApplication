@@ -17,6 +17,11 @@
   h2{
     color: rgb(6, 149, 245);
   }
+  .btn{
+   margin: 20px;
+   
+   
+  }
   /* .loginContainer {
     display: flex;
     flex-direction: column;
