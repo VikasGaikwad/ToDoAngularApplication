@@ -1,6 +1,5 @@
 // BrowserModule is used to showing the content on browser.
 // NgModule is use to import the created components and othe modules.
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import {MatInputModule} from '@angular/material';
@@ -8,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormControl, Validators} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpService} from '../app/http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -34,17 +36,17 @@ import { RegisterComponent } from './register/register.component';
   ],
    // importing MatFormFieldModule manually.
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    // FormControl,
-   // Validators
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 

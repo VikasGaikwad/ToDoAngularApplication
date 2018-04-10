@@ -6,23 +6,24 @@
 <h2>Login Form</h2>
 <div class="loginContainer">
   <mat-form-field>
-    <input  matInput placeholder="username" >
-    <!-- <input placeholder="username" matInput [formControl]="email" required> -->
-    <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+    <input  matInput placeholder="Enter Email Id" name="email" [(ngModel)]="model.email" required>
   </mat-form-field>
 </div>
 
 <div class="loginContainer">
   <mat-form-field>
-    <input type="password" matInput placeholder="password">
+    <input type="password" matInput placeholder="Enter Password" name="password" [(ngModel)]="model.password" required >
   </mat-form-field>
 </div>
 
-<div class="btn">
-  <!-- <a mat-button routerLink=".">Login</a> -->
-  <button mat-raised-button color="primary">Login</button>
-</div>
+<!-- <div class="btn1">
+  <a mat-button routerLink="/login">Login</a>
+</div> -->
 
-<div>
+<div class="btn2">
+  <!-- <a mat-button routerLink="/register">Register</a> -->
+  <button type="submit" (click)="login()" mat-raised-button color="primary">login</button>
+
+    
   <a href="forgot">forget password</a>
 </div>

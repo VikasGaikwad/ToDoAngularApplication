@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../http.service';
+
 // import {FormControl, Validators} from '@angular/forms';
 
 @Component({
@@ -8,19 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LoginComponent implements OnInit {
+model: any = {};
+  constructor(private httpser: HttpService) { }
+  login(): void {
+    console.log('login', this.model);
+    this.httpser.postService('http://localhost:8080/ToDoApplication/userapi/login', this.model).subscribe(response => {
+    if (response.status.body === 200) {
+    console.log('registration success');
+    alert('User registration successful..');
+    } else if (response.status !== 200) {
 
-  constructor() { }
+    }
+    });
+    }
 
   ngOnInit() {
   }
 
 }
-// export class FormFieldErrorExample {
-//   email = new FormControl('', [Validators.required, Validators.email]);
-
-//   getErrorMessage() {
-//     return this.email.hasError('required') ? 'You must enter a value' :
-//         this.email.hasError('email') ? 'Not a valid email' :
-//             '';
-//   }
-// }
