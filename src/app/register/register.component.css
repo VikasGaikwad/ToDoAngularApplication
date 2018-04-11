@@ -1,9 +1,8 @@
 .registercontainer {
-    display: flex;   
-    width: 200px;
- margin: auto;
- width: 100%;
- margin: 0%;
+  width: 30%;
+  height: 80%;
+  margin: 0 auto;
+  background-color: #6aa0dc;
 
     
   }
@@ -13,5 +12,35 @@
     justify-content: space-around;
   }
   h2{
-    color: rgb(6, 149, 245);
+   color: rgb(245, 6, 117);
+    text-align: center;
+    font-family: "Blenda Script Regular", 'decorative', sans-serif;
+    font-size: 2.1em;
+    margin: 0 auto;
+    padding: 15px;
   }
+  a{
+    text-decoration: none;
+    color: lightseagreen;
+    background: royalblue;
+    /* margin-top: 50px; */
+    
+  }
+  body {
+    width: 100%;
+    background-color: #6aa0dc;
+    margin: 0 auto;
+    padding: 15%;
+    align-content: center;
+}
+.btn2{
+  margin: auto;
+  width: 30%;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 10px;
+  color: aliceblue;
+  background-color: #6aa0dc;
+  text-align: center;
+  
+ }

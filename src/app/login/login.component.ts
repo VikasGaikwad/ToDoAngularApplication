@@ -12,17 +12,19 @@ import { HttpService } from '../http.service';
 export class LoginComponent implements OnInit {
 model: any = {};
   constructor(private httpser: HttpService) { }
+  // --------------------------------------------------------------------------
   login(): void {
     console.log('login', this.model);
     this.httpser.postService('http://localhost:8080/ToDoApplication/userapi/login', this.model).subscribe(response => {
     if (response.status.body === 200) {
     console.log('registration success');
-    alert('User registration successful..');
+    window.alert('User registration successful..');
     } else if (response.status !== 200) {
 
     }
     });
     }
+  // -------------------------------------------------------------------------
 
   ngOnInit() {
   }

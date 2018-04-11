@@ -10,6 +10,13 @@ import {FormControl, Validators} from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpService} from '../app/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+
+
+
+
 
 
 
@@ -21,7 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-// import { FormFieldErrorExample } from './login/login.component';
+import { NotesComponent } from './notes/notes.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { HomeComponent } from './home/home.component';
 
 
 // MatFormFieldModule container is imported to designinfg forms in login and registration page
@@ -32,9 +42,12 @@ import { RegisterComponent } from './register/register.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotesComponent,
+    ForgotComponent,
+    ResetpasswordComponent,
+    HomeComponent
   ],
-   // importing MatFormFieldModule manually.
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -44,6 +57,8 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSidenavModule,
+    MatToolbarModule
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
   providers: [HttpService],

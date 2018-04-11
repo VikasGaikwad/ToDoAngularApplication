@@ -1,0 +1,10 @@
+<h2>Forgot Password ???</h2>
+<body>
+  <div class="forgotContainer">
+    <mat-form-field>
+      <input  matInput placeholder="Enter Email Id" name="email" [(ngModel)]="model.email" required>
+      <button type="submit" (click)="forgot()" mat-raised-button color="primary">send link</button>
+    </mat-form-field>
+  </div>
+  
+</body>

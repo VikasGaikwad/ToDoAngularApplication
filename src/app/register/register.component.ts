@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   constructor(private httpser: HttpService) { }
   register(): void {
     console.log('register', this.model);
-    this.httpser.postService('http://localhost:8080/ToDoApplication/register', this.model).subscribe(response => {
+    this.httpser.postService('http://localhost:8080/ToDoApplication/userapi/register', this.model).subscribe(response => {
     if (response.status.body === 200) {
     console.log('registration success');
     alert('User registration successful..');
