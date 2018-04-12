@@ -19,7 +19,13 @@ const routes: Routes = [
 {path : 'notes', component : NotesComponent},
 {path : 'forgot', component : ForgotComponent},
 { path : 'resetpassword', component : ResetpasswordComponent },
-{path : 'home' , component : HomeComponent}
+{path : 'home' , component : HomeComponent,
+children: [
+  // { path: '', redirectTo: 'notes', pathMatch: 'full' },
+  { path: 'notes', component: NotesComponent },
+
+]
+}
 
 ];
 

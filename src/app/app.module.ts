@@ -1,5 +1,9 @@
 // BrowserModule is used to showing the content on browser.
 // NgModule is use to import the created components and othe modules.
+
+// Making Material Design components available in our application is done by importing
+// modules in app.module.ts
+
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import {MatInputModule} from '@angular/material';
@@ -10,8 +14,13 @@ import {FormControl, Validators} from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpService} from '../app/http.service';
 import { HttpClientModule } from '@angular/common/http';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSidenavModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 
 
 
@@ -58,7 +67,11 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    FlexLayoutModule
+
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
   providers: [HttpService],

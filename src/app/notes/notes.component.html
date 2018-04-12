@@ -1,6 +1,22 @@
-<body>
+
 <div>
- 
+    <mat-card class="matcard"  fxLayout="column" fxLayoutAlign="end center" >
+<mat-card-header>
+    <mat-card-title>
+<input type="text" contenteditable="true" placeholder="Title">
+
+    </mat-card-title>
+    <mat-card-subtitle>
+
+            <input  type="text" contenteditable="true" placeholder="take a note">
+
+    </mat-card-subtitle>
+    
+</mat-card-header>
+<!-- <button mat-button>Done</button> -->
+<button type="submit" (click)="createnote()" mat-raised-button color="primary">done</button>
+</mat-card>
+
 </div>
 
-</body>
+

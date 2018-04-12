@@ -1,9 +1,17 @@
-<mat-toolbar color="primary">
-        <mat-toolbar-row>
-          <span>Custom Toolbar</span>
-        </mat-toolbar-row>
-        </mat-toolbar>
-<mat-sidenav-container class="example-container">
-        <mat-sidenav  mode="side" opened>contents</mat-sidenav>
-        <mat-sidenav-content>ToDo Application</mat-sidenav-content>
-      </mat-sidenav-container>
+<div>
+<mat-toolbar  class="toolbar">
+  <mat-icon (click)="sidenav.toggle()" >menu</mat-icon>
+          <span>Toolbar</span>       
+  </mat-toolbar>
+
+</div>
+<mat-sidenav-container class="example-co">
+    <mat-sidenav #sidenav class="example-sidenav">
+        <div>
+                <a mat-button routerLink="/home/notes">note</a>
+        </div>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+
+    
+</mat-sidenav-container>

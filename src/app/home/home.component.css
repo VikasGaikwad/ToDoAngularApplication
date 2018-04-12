@@ -1,18 +1,19 @@
-.example-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgb(206, 203, 203);
-}
-.navbar{
-  background: yellow;
-}
-.example-icon {
-  padding: 0 14px;
+
+.toolbar{
+  color: rgb(10, 10, 10);
+  background-color: rgb(255, 187, 0);
 }
 
-.example-spacer {
-  flex: 1 1 auto;
+.example-co{
+  
+  background-color: white;
+  width: auto;
+  height:600px;
+}
+
+
+.example-sidenav {
+
+  width: 200px;
+  padding: 80px;
 }

@@ -9,5 +9,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   // title is binding or interpolation, its part of browser
-  title = 'TODO';
 }

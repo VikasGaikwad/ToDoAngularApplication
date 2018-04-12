@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../http.service';
+
 
 @Component({
   selector: 'app-notes',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class NotesComponent implements OnInit {
+  model: any = {};
+  constructor(private httpser: HttpService) { }
 
-  constructor() { }
 
+ createnote(): void {
+    console.log('done', this.model);
+    this.httpser.postService('http://localhost:8080/ToDoApplication/userapi/createnote', this.model).subscribe(response => {
+    if (response.status.body === 200) {
+    console.log('note added successfully');
+    window.alert('note added successfully');
+    } else if (response.status !== 200) {
+
+    }
+    });
+    }
   ngOnInit() {
   }
 
