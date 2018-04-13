@@ -1,22 +1,24 @@
 
 <div>
-    <mat-card class="matcard"  fxLayout="column" fxLayoutAlign="end center" >
-<mat-card-header>
-    <mat-card-title>
-<input type="text" contenteditable="true" placeholder="Title">
+    <div fxFlex="1200px" fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px" (click)="show=!show" *ngIf="!show">
+        <mat-card>
+            <mat-card-title>Take a note...</mat-card-title>
+        </mat-card>
+    </div>
 
-    </mat-card-title>
-    <mat-card-subtitle>
+    <div fxFlex="1200px" fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px" *ngIf="show">
+        <mat-card>
+            <mat-card-title>
+                 <div contenteditable="true" placeholder="title" (input)="model.title=$event.target.innerHTML">title</div>
+            </mat-card-title>
 
-            <input  type="text" contenteditable="true" placeholder="take a note">
+            <mat-card-subtitle>
+                <div contenteditable="true" placeholder="take a note" (input)="model.description=$event.target.innerHTML">create a note...</div>
+            </mat-card-subtitle>
 
-    </mat-card-subtitle>
-    
-</mat-card-header>
-<!-- <button mat-button>Done</button> -->
-<button type="submit" (click)="createnote()" mat-raised-button color="primary">done</button>
-</mat-card>
 
+            <button type="submit" (click)="createnote()" mat-raised-button color="primary">done</button>
+
+        </mat-card>
+    </div>
 </div>
-
-

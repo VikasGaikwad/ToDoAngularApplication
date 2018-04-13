@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
     console.log('registration success');
     alert('User registration successful..');
     } else if (response.status !== 200) {
-
+      console.log('registration fail');
     }
     });
     }

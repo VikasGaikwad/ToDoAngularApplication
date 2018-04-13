@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormControl, Validators} from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpService} from '../app/http.service';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -65,6 +66,7 @@ import { HomeComponent } from './home/home.component';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserModule,
     HttpClientModule,
     MatSidenavModule,
     MatToolbarModule,
