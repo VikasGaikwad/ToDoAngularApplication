@@ -21,7 +21,7 @@ const routes: Routes = [
 { path : 'resetpassword', component : ResetpasswordComponent },
 {path : 'home' , component : HomeComponent,
 children: [
-  // { path: '', redirectTo: 'notes', pathMatch: 'full' },
+  { path: '', redirectTo: 'notes', pathMatch: 'full' },
   { path: 'notes', component: NotesComponent },
 
 ]

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { NoteResponse } from '../noteResponse';
+
 
 
 @Component({
@@ -9,24 +11,50 @@ import { HttpService } from '../http.service';
 })
 
 export class NotesComponent implements OnInit {
+  // get all html page data
   model: any = {};
   // show: boolean = false;
+  response: any = {};
+  notes: NoteResponse[];
+  constructor(private http: HttpService) { }
 
-  constructor(private httpser: HttpService) { }
-
-
+  ngOnInit() {
+    localStorage.getItem('Authorization');
+    this.http.getService('http://localhost:8080/ToDoApplication/user/readallnotes').subscribe(response => {
+this.notes = response;
+    });
+  }
  createnote(): void {
     console.log('createnote', this.model);
-    this.httpser.postService('http://localhost:8080/ToDoApplication/userapi/createnote', this.model).subscribe(response => {
+    // this.noteService.create()
+    this.http.postService('http://localhost:8080/ToDoApplication/createnote', this.model)
+             .subscribe(response => {
+              this.response = response;
+    console.log(response);
 
-    console.log('note added successfully');
-    window.alert('note added successfully');
 
 
     });
     }
+    deletenote(note, status): void {
+      note.trash = status;
 
-  ngOnInit() {
-  }
+      console.log('deletenote', note);
+this.http.putService('http://localhost:8080/ToDoApplication/user/updatenote', note)
+.subscribe(response => {
+  this.response = response;
+console.log(response);
+});
+    }
+
+
+
 
 }
+
+
+
+
+
+
+

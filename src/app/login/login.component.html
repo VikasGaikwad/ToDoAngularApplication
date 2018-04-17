@@ -4,28 +4,30 @@
 <input type="password" name="password" placeholder="enter password">
 <input type="submit" value="login"> -->
 <body>
-<h2>Login Form</h2>
-<div class="loginContainer">
-  <mat-form-field>
-    <input  matInput placeholder="Enter Email Id" name="email" [(ngModel)]="model.email" required>
-  </mat-form-field>
-</div>
-
-<div class="loginContainer">
-  <mat-form-field>
-    <input type="password" matInput placeholder="Enter Password" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="model.password" required >
-  </mat-form-field>
-</div>
-
-<!-- <div class="btn1">
-  <a mat-button routerLink="/login">Login</a>
-</div> -->
-
-<div class="btn2" >
-  <!-- <a mat-button routerLink="/register">Register</a> -->
-  <button type="submit" (click)="login()" mat-raised-button color="primary">login</button>
-
-    
-  <a href="forgot">forget password</a>
-</div>
-</body>
+  <h2>Login Form</h2>
+  <form (ngSubmit)="login()">
+  <div class="loginContainer">
+    <mat-form-field>
+      <input  matInput placeholder="Enter Email Id" name="email" [(ngModel)]="model.email" required>
+    </mat-form-field>
+  </div>
+  
+  <div class="loginContainer">
+    <mat-form-field>
+      <input type="password" matInput placeholder="Enter Password" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="model.password" required >
+    </mat-form-field>
+  </div>
+  
+  <!-- <div class="btn1">
+    <a mat-button routerLink="/login">Login</a>
+  </div> -->
+  
+  <div class="btn2" >
+    <!-- <a mat-button routerLink="/register">Register</a> -->
+    <button type="submit"  mat-raised-button color="primary">login</button>
+  
+      
+    <a href="forgot">forget password</a>
+  </div>
+</form>
+  </body>

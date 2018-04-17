@@ -1,24 +1,65 @@
 
 <div>
-    <div fxFlex="1200px" fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px" (click)="show=!show" *ngIf="!show">
-        <mat-card>
-            <mat-card-title>Take a note...</mat-card-title>
-        </mat-card>
-    </div>
-
-    <div fxFlex="1200px" fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px" *ngIf="show">
-        <mat-card>
-            <mat-card-title>
-                 <div contenteditable="true" placeholder="title" (input)="model.title=$event.target.innerHTML">title</div>
-            </mat-card-title>
-
-            <mat-card-subtitle>
-                <div contenteditable="true" placeholder="take a note" (input)="model.description=$event.target.innerHTML">create a note...</div>
-            </mat-card-subtitle>
-
-
-            <button type="submit" (click)="createnote()" mat-raised-button color="primary">done</button>
-
-        </mat-card>
-    </div>
+<div fxLayoutAlign="center center" style="margin-top:80px; " (click)="show=!show" *ngIf="!show">
+<mat-card fxFlex="50">
+    <div>Take a Note ... </div>
+</mat-card>
 </div>
+
+
+ 
+
+    
+    <div  fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px" *ngIf="show">
+       <mat-card>
+          <div style="width: 400px; height: 100px;">
+          <mat-card-title>
+                   
+                <input type="text" data-text='title' placeholder="Title" name="title" [(ngModel)]="model.title" matInput style="border: none;outline: none" > 
+
+          </mat-card-title>
+
+           <mat-card-subtitle>
+               <input type="text" data-text='Title' placeholder="take a note..." name="description" [(ngModel)]="model.description" matInput style="border: none;outline: none" > 
+
+
+         </mat-card-subtitle>
+
+
+         <button type="submit" (click)="createnote()" mat-raised-button color="primary">done</button>
+      </div>
+        </mat-card>
+        </div>
+        <div fxLayoutAlign="center center" class="class-container" >
+            <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
+        <div *ngFor="let note of notes">
+                <mat-card fxFlex="230px">
+                    <div>  
+                     <mat-card-title><b>{{note.title}}</b></mat-card-title>
+                     <mat-card-title>{{note.description}}</mat-card-title>
+                     <div fxLayout="row" fxLayoutAlign="end end">
+
+                            <mat-menu #appMenu="matMenu">
+                             <button mat-menu-item (click)="deletenote(note,'true')">Delete note</button>
+                             <button mat-menu-item>*******</button>
+                             <button mat-menu-item>*******</button>
+                             </mat-menu>
+                     <button mat-icon-button [matMenuTriggerFor]="appMenu">
+                         <mat-icon>more_vert</mat-icon> 
+                        </button>  
+                    
+                     
+                    </div>
+                     </div>
+               </mat-card>
+             </div>
+            </div>
+            </div>
+
+
+
+
+            
+            </div>    
+
+

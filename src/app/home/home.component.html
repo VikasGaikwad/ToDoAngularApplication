@@ -1,17 +1,26 @@
-<div>
-<mat-toolbar  class="toolbar">
-  <mat-icon (click)="sidenav.toggle()" >menu</mat-icon>
-          <span>Toolbar</span>       
-  </mat-toolbar>
 
-</div>
-<mat-sidenav-container class="example-co">
-    <mat-sidenav #sidenav class="example-sidenav">
+
+
+    <mat-toolbar style="background-color:rgb(9, 212, 248)">
+        <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon> </button>
         <div>
-                <a mat-button routerLink="/home/notes">note</a>
+            fundooNotes
         </div>
-    </mat-sidenav>
-    <router-outlet></router-outlet>
+    </mat-toolbar>
 
-    
-</mat-sidenav-container>
+    <mat-sidenav-container style="height:100vh;" >
+        <mat-sidenav #sidenav mode="side" opened >
+            <div>
+                    
+                <a mat-button routerLink="/home/notes"><mat-icon>lightbulb_outline</mat-icon> Notes</a>
+                
+        </div>
+        <div>
+                    
+                <a mat-button routerLink="/home/notes"><mat-icon>delete</mat-icon>Trash</a>
+                
+        </div>
+
+        </mat-sidenav>
+        <router-outlet></router-outlet>
+    </mat-sidenav-container>

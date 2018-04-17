@@ -11,25 +11,23 @@ import { HttpService } from '../http.service';
 
 export class LoginComponent implements OnInit {
 model: any = {};
-  constructor(private httpser: HttpService) { }
+ statusCode: string;
+ response: any = {};
+
+  constructor(private http: HttpService) { }
+
+
   // --------------------------------------------------------------------------
   login(): void {
     console.log('login', this.model);
-    this.httpser.postService('http://localhost:8080/ToDoApplication/userapi/login', this.model).subscribe(response => {
-      // => this is the next and hold the response
-      console.log(response);
-    if (response.status.body === 200) {
-      // set response header in auth
-      // localStorage.setItem('auth', response.headers.get('auth'));
-    console.log('login success');
-console.log(response.headers.get('auth'));
-    localStorage.setItem('auth', response.headers.get('auth'));
-    window.alert('User login successful..');
-    } else if (response.status !== 200) {
-      console.log('login fail');
-    }
-    });
-    }
+    this.http.postServiceLogin('http://localhost:8080/ToDoApplication/login', this.model)
+             .subscribe(response => {
+             this.response = response;
+            // localStorage.setItem('Authorization', response.headers.get('Authorization'));
+            localStorage.setItem('Authorization', response.headers.get('Authorization'));
+             });
+            }
+
   // -------------------------------------------------------------------------
 
   ngOnInit() {
