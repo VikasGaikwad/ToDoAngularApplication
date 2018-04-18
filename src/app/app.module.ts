@@ -44,6 +44,8 @@ import { NotesComponent } from './notes/notes.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { HomeComponent } from './home/home.component';
+import { TrashComponent } from './trash/trash.component';
+// import { HomeNewComponent } from './home-new/home-new.component';
 
 
 // MatFormFieldModule container is imported to designinfg forms in login and registration page
@@ -58,7 +60,9 @@ import { HomeComponent } from './home/home.component';
     NotesComponent,
     ForgotComponent,
     ResetpasswordComponent,
-    HomeComponent
+    HomeComponent,
+    TrashComponent
+
   ],
   imports: [
     BrowserAnimationsModule,

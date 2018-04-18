@@ -1,26 +1,51 @@
 
 
-
-    <mat-toolbar style="background-color:rgb(9, 212, 248)">
+<mat-toolbar style="background-color:rgb(255, 217, 0)">
         <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon> </button>
         <div>
             fundooNotes
         </div>
     </mat-toolbar>
+    
 
-    <mat-sidenav-container style="height:100vh;" >
-        <mat-sidenav #sidenav mode="side" opened >
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav mode="side"    >
             <div>
-                    
+                    <!-- A routerLink attribute is set to "/notes", 
+                    the string that the router matches to the route to NotesComponent -->
                 <a mat-button routerLink="/home/notes"><mat-icon>lightbulb_outline</mat-icon> Notes</a>
-                
+              
         </div>
         <div>
                     
-                <a mat-button routerLink="/home/notes"><mat-icon>delete</mat-icon>Trash</a>
+                <a mat-button routerLink="/home/trash"><mat-icon>delete</mat-icon>Trash</a>
                 
         </div>
 
         </mat-sidenav>
-        <router-outlet></router-outlet>
+
+        <!-- The <router-outlet> tells the router where to display routed views. -->
+        <router-outlet> </router-outlet>
     </mat-sidenav-container>
+
+
+    <!-- <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon> </button>
+          <span>fundooNotes</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-sidenav-container>
+            <mat-sidenav>
+      <div>
+                    
+            <a mat-button routerLink="/home/notes"><mat-icon>lightbulb_outline</mat-icon>Notes</a>
+            
+    </div>
+    <div>
+                    
+            <a mat-button routerLink="/home/notes"><mat-icon>delete</mat-icon>Trash</a>
+            
+    </div>
+</mat-sidenav>
+</mat-sidenav-container> -->

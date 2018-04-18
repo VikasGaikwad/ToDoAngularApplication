@@ -6,7 +6,7 @@ import {NotesComponent} from './notes/notes.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { HomeComponent } from './home/home.component';
-
+import {TrashComponent} from './trash/trash.component';
 
 
 // redirectTo will redirect the first page to login page by default
@@ -23,6 +23,7 @@ const routes: Routes = [
 children: [
   { path: '', redirectTo: 'notes', pathMatch: 'full' },
   { path: 'notes', component: NotesComponent },
+  {path: 'trash', component: TrashComponent}
 
 ]
 }

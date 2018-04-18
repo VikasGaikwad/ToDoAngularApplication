@@ -19,32 +19,30 @@ export class NotesComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   ngOnInit() {
-    localStorage.getItem('Authorization');
-    this.http.getService('http://localhost:8080/ToDoApplication/user/readallnotes').subscribe(response => {
-this.notes = response;
+    this.http.getService('readallnotes').subscribe(response => {
+    this.notes = response.body;
+    console.log(this.notes);
     });
   }
  createnote(): void {
     console.log('createnote', this.model);
     // this.noteService.create()
-    this.http.postService('http://localhost:8080/ToDoApplication/createnote', this.model)
+    this.http.postService('createnote', this.model)
              .subscribe(response => {
               this.response = response;
-    console.log(response);
-
-
-
+               console.log(response);
     });
     }
-    deletenote(note, status): void {
+    trashnote(note, status): void {
       note.trash = status;
 
-      console.log('deletenote', note);
-this.http.putService('http://localhost:8080/ToDoApplication/user/updatenote', note)
-.subscribe(response => {
-  this.response = response;
-console.log(response);
-});
+      console.log('trashnote', note);
+      this.http.putService('updatenote', note)
+      .subscribe(response => {
+        this.response = response;
+
+        console.log(response);
+    });
     }
 
 

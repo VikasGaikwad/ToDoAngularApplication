@@ -8,49 +8,62 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { NoteResponse } from './noteResponse';
 //  The @Injectable() decorator tells Angular that this service
 //  might itself have injected dependencies.
+
+
+
 @Injectable()
 export class HttpService {
+  base_Url = 'http://localhost:8080/ToDoApplication/user/';
+  noteUrl = 'http://localhost:8080/ToDoApplication/';
+  urlPath: string;
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-     'Authorization': localStorage.getItem('Authorization')
-    })
-    // observe: 'response' as 'response'
-
+      'Content-Type':  'application/json'
+    }),
+    // observe: 'response'
+    observe: 'response' as 'response'
   };
   constructor(private http: HttpClient) {
-    console.log();
+  }
+  appendToken(): void {
+    console.log(localStorage.getItem('Authorization'));
 
-    //  if (localStorage.getItem('Authorization')) {
-    //    this.httpOptions.headers.append('Authorization', localStorage.getItem('Authorization'));
-    // }
-   }
+    if ( localStorage.getItem('Authorization') ) {
+     // localStorage.removeItem('Authorization');
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
+    }
+  }
 
   // The HTTP Client POST service sends HTTP POST requests to a trading partner's -
   // HTTP server via the perimeter server. This service works with the HTTP Client -
   // Begin service and the HTTP Client End service and through an instance of the HTTP -
   // Client adapter.
 
-  postServiceLogin(url, obj): Observable<any> {
-    return this.http.post<any>(url, obj, this.httpOptions);
+  postServiceLogin(loginUrl, userObj): Observable<any> {
+    this.urlPath = this.noteUrl.concat(loginUrl);
+    return this.http.post<any>(this.urlPath, userObj, this.httpOptions);
   }
-  postService(url, obj): Observable<any> {
-  return this.http.post<any>(url, obj, this.httpOptions);
-}
-getService(url): Observable<NoteResponse[]> {
-  // return this.http.get<any>(url, this.httpOptions);
+  postService(createnote, obj): Observable<any> {
+    this.urlPath = this.noteUrl.concat(createnote);
+    this.appendToken();
+    return this.http.post<any>(this.urlPath, obj, this.httpOptions);
+  }
+  // getService(readallnotes): Observable<NoteResponse[]> {
+  getService(readallnotes): Observable<any> {
+    this.urlPath = this.base_Url.concat(readallnotes);
+    this.appendToken();
+    return this.http.get<NoteResponse[]>(this.urlPath , this.httpOptions);
+  }
 
-  return this.http.get<NoteResponse[]>(url, this.httpOptions);
+  putService(updatenote, note): Observable<any> {
+    this.urlPath = this.base_Url.concat(updatenote);
+     this.appendToken();
+    return this.http.put<any>(this.urlPath , note, this.httpOptions );
+  }
 
-
-}
-
-putService(url, note): Observable<any> {
-  return this.http.put<any>(url , note, this.httpOptions );
-}
-
-
-
-
-
+  deleteService(deletenote, note): Observable<any> {
+    this.urlPath = this.noteUrl.concat(deletenote);
+    this.appendToken();
+    return this.http.delete<any>(this.urlPath, this.httpOptions);
+  }
 }
