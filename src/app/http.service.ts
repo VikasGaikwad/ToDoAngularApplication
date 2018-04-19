@@ -61,9 +61,9 @@ export class HttpService {
     return this.http.put<any>(this.urlPath , note, this.httpOptions );
   }
 
-  deleteService(deletenote, note): Observable<any> {
-    this.urlPath = this.noteUrl.concat(deletenote);
-    this.appendToken();
+  deleteService(path): Observable<any> {
+
+    this.urlPath = this.base_Url.concat(path);
     return this.http.delete<any>(this.urlPath, this.httpOptions);
   }
 }

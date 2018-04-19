@@ -1,24 +1,26 @@
 <div>
 <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
     <div *ngFor="let note of notes">
-        <mat-card fxFlex="230px">
-            <div *ngIf="note.trash=='true'">  
-                    <!-- <div *ngIf="notes.trash===true">   -->
+        
+            <div *ngIf="note.trash===true">  
+                    <mat-card fxFlex="230px">
+                   
                 <mat-card-title><b>{{note.title}}</b></mat-card-title>
                 <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
                     <div fxLayout="row" fxLayoutAlign="end end">
 
                         <mat-menu #appMenu="matMenu">
-                            <button mat-menu-item (click)="deletenote()">Permanent Delete</button>
-                            <button mat-menu-item>*******</button>
-                            
+                            <button mat-menu-item (click)="deletenote(note.noteId)">Delete Forever</button>
+                            <button mat-menu-item (click)="trashnote(note,'false')">Restore</button>
+                             
                         </mat-menu>
                         <button mat-icon-button [matMenuTriggerFor]="appMenu">
                             <mat-icon>more_vert</mat-icon> 
                         </button>                       
                     </div>
+                </mat-card>
             </div>
-        </mat-card>
+        
     </div>
 </div>
 </div>

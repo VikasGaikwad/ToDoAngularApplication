@@ -45,6 +45,7 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { HomeComponent } from './home/home.component';
 import { TrashComponent } from './trash/trash.component';
+import { ArchiveComponent } from './archive/archive.component';
 // import { HomeNewComponent } from './home-new/home-new.component';
 
 
@@ -61,7 +62,8 @@ import { TrashComponent } from './trash/trash.component';
     ForgotComponent,
     ResetpasswordComponent,
     HomeComponent,
-    TrashComponent
+    TrashComponent,
+    ArchiveComponent
 
   ],
   imports: [

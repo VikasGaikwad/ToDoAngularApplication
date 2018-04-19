@@ -4,6 +4,7 @@ import { NoteResponse } from '../noteResponse';
 
 
 
+
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
@@ -12,7 +13,9 @@ import { NoteResponse } from '../noteResponse';
 
 export class NotesComponent implements OnInit {
   // get all html page data
+pinSVG = '/assets/pin.svg';
   model: any = {};
+
   // show: boolean = false;
   response: any = {};
   notes: NoteResponse[];
@@ -35,6 +38,29 @@ export class NotesComponent implements OnInit {
     }
     trashnote(note, status): void {
       note.trash = status;
+
+
+      console.log('trashnote', note);
+      this.http.putService('updatenote', note)
+      .subscribe(response => {
+        this.response = response;
+
+        console.log(response);
+    });
+    }
+    archivenote(note, status): void {
+      note.archive = status;
+      console.log('trashnote', note);
+      this.http.putService('updatenote', note)
+      .subscribe(response => {
+        this.response = response;
+
+        console.log(response);
+    });
+    }
+    pinnote(note, status): void {
+      note.pin = status;
+
 
       console.log('trashnote', note);
       this.http.putService('updatenote', note)
