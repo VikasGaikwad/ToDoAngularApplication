@@ -1,0 +1,28 @@
+<div>
+  <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
+    <div *ngFor="let note of notes">
+
+      <div *ngIf="note.reminder!=null">
+        <mat-card fxFlex="265px">
+
+          <mat-card-title>
+            <b>{{note.title}}</b>
+          </mat-card-title>
+          <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
+          <div *ngIf="note.reminder!=null">
+            <div mat-menu-item>
+              <mat-chip-list>
+                <mat-chip selected="true" class="chip">
+                  <label>{{note.reminder | date:'MMM dd,y, hh:mm a'}}</label>
+                  <mat-icon (click)="reminder(note,'null')">close</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+</div>

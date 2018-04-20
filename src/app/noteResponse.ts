@@ -5,4 +5,5 @@ description: string;
 trash: boolean;
 archive: boolean;
 pin: boolean;
+reminder: Date;
 }

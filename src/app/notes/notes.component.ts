@@ -14,7 +14,9 @@ import { NoteResponse } from '../noteResponse';
 export class NotesComponent implements OnInit {
   // get all html page data
 pinSVG = '/assets/pin.svg';
+
   model: any = {};
+  today: Date;
 
   // show: boolean = false;
   response: any = {};
@@ -74,7 +76,107 @@ pinSVG = '/assets/pin.svg';
 
 
 
-}
+    reminder(note, day): void {
+      if (day === 'Today') {
+            this.today = new Date();
+            this.today.setHours(20);
+            this.today.setMinutes(0);
+            this.today.setMilliseconds(0);
+            note.reminder = this.today;
+
+          } else if ( day === 'Tomorrow') {
+               this.today = new Date();
+               this.today.setDate(this.today.getDate() + 1);
+               this.today.setHours(8);
+               this.today.setMinutes(0);
+             this.today.setMilliseconds(0);
+               note.reminder = this.today;
+          } else if (day === 'NextWeek') {
+               this.today = new Date();
+               this.today.setDate(this.today.getDate() + 6);
+               this.today.setHours(8);
+               this.today.setMinutes(0);
+               this.today.setMilliseconds(0);
+               note.reminder = this.today;
+               } else if (day === 'null') {
+               note.reminder = null;
+               }
+            this.http.putService('updatenote', note).subscribe(response => {
+              this.response = response;
+              console.log(response);
+            });
+
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // reminderUpdate(note,day,field){
+    //   if(day==='Today'){
+    //   var today =new Date();
+    //   today.setHours(20);
+    //   today.setMinutes(0);
+    //   today.setMilliseconds(0);
+    //   note.reminder= today;
+    //   }
+    //   else if(day==='Tomorrow'){
+    //   var today =new Date();
+    //   today.setDate(today.getDate()+1);
+    //   today.setHours(8);
+    //   today.setMinutes(0);
+    //   today.setMilliseconds(0);
+    //   note.reminder= today;
+    //   }
+    // else if(day==='Next week'){
+    //   var today =new Date();
+    //   today.setDate(today.getDate()+6);
+    //   today.setHours(8);
+    //   today.setMinutes(0);
+    //   today.setMilliseconds(0);
+    //   note.reminder= today;
+    //   }else if(day==='null'){
+    //   note.reminder=null;
+    //   }
+    //   this.noteService.updateNotes(note,status,field).subscribe(response => {
+    //   console.log("Archive response", response);
+    //   });
+    //   }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

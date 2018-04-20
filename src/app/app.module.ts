@@ -21,6 +21,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -46,6 +47,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { HomeComponent } from './home/home.component';
 import { TrashComponent } from './trash/trash.component';
 import { ArchiveComponent } from './archive/archive.component';
+import { RemindersComponent } from './reminders/reminders.component';
 // import { HomeNewComponent } from './home-new/home-new.component';
 
 
@@ -63,7 +65,8 @@ import { ArchiveComponent } from './archive/archive.component';
     ResetpasswordComponent,
     HomeComponent,
     TrashComponent,
-    ArchiveComponent
+    ArchiveComponent,
+    RemindersComponent
 
   ],
   imports: [
@@ -81,7 +84,8 @@ import { ArchiveComponent } from './archive/archive.component';
     MatIconModule,
     MatCardModule,
     FlexLayoutModule,
-    MatMenuModule
+    MatMenuModule,
+    MatChipsModule
 
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.

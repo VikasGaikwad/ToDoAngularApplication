@@ -8,6 +8,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { HomeComponent } from './home/home.component';
 import {TrashComponent} from './trash/trash.component';
 import { ArchiveComponent } from './archive/archive.component';
+import { RemindersComponent } from './reminders/reminders.component';
 
 
 // redirectTo will redirect the first page to login page by default
@@ -25,7 +26,8 @@ children: [
   { path: '', redirectTo: 'notes', pathMatch: 'full' },
   { path: 'notes', component: NotesComponent },
   {path: 'trash', component: TrashComponent},
-  {path: 'archive', component: ArchiveComponent}
+  {path: 'archive', component: ArchiveComponent},
+  {path: 'reminder', component: RemindersComponent}
 
 ]
 }
