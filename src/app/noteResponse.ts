@@ -6,4 +6,5 @@ trash: boolean;
 archive: boolean;
 pin: boolean;
 reminder: Date;
+color: string;
 }

@@ -22,18 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
-
-
-
-
-
-
-
-
-
-
-
-
+import {CanActivate} from '@angular/router';
 
 // AppComponent is import for loaing components in @NgModel from app.component.ts
 // LoginComponent is import for loaing components in @NgModel from login/login.component.ts
@@ -48,6 +37,7 @@ import { HomeComponent } from './home/home.component';
 import { TrashComponent } from './trash/trash.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { RemindersComponent } from './reminders/reminders.component';
+import { AuthGuard } from './auth/AuthGuard';
 // import { HomeNewComponent } from './home-new/home-new.component';
 
 
@@ -85,11 +75,11 @@ import { RemindersComponent } from './reminders/reminders.component';
     MatCardModule,
     FlexLayoutModule,
     MatMenuModule,
-    MatChipsModule
+    MatChipsModule,
 
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
-  providers: [HttpService],
+  providers: [HttpService, AuthGuard],
   bootstrap: [AppComponent]
 })
 
