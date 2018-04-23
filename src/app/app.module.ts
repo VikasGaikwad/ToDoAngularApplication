@@ -23,7 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {CanActivate} from '@angular/router';
-
+// import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 // AppComponent is import for loaing components in @NgModel from app.component.ts
 // LoginComponent is import for loaing components in @NgModel from login/login.component.ts
 // RegisterComponent is import for loaing components in @NgModel from register/register.component.ts
@@ -38,6 +38,8 @@ import { TrashComponent } from './trash/trash.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { RemindersComponent } from './reminders/reminders.component';
 import { AuthGuard } from './auth/AuthGuard';
+import { LabelNavComponent } from './label-nav/label-nav.component';
+import {MatDialogModule} from '@angular/material/dialog';
 // import { HomeNewComponent } from './home-new/home-new.component';
 
 
@@ -56,7 +58,8 @@ import { AuthGuard } from './auth/AuthGuard';
     HomeComponent,
     TrashComponent,
     ArchiveComponent,
-    RemindersComponent
+    RemindersComponent,
+    LabelNavComponent
 
   ],
   imports: [
@@ -76,9 +79,13 @@ import { AuthGuard } from './auth/AuthGuard';
     FlexLayoutModule,
     MatMenuModule,
     MatChipsModule,
+    MatDialogModule
+    // MatDialogRef
+
 
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
+  entryComponents: [LabelNavComponent],
   providers: [HttpService, AuthGuard],
   bootstrap: [AppComponent]
 })

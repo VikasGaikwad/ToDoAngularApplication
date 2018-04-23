@@ -43,6 +43,17 @@ export class HttpService {
     this.urlPath = this.noteUrl.concat(loginUrl);
     return this.http.post<any>(this.urlPath, userObj, this.httpOptions);
   }
+  // postServiceData(noteUrl,obj): Observable<HttpResponse<any>>{ //login,register,createNote,createcollaborator
+  //   console.log(path,model);
+  //   this.addAuthorization();
+  //   this.urlpath= this.base_url.concat(path);
+  //   console.log(this.urlpath);
+  //   return this.http.post<any>(this.urlpath,obj,this.httpOptions);
+  // }
+  postserviceLabel(createLabel, obj): Observable<any>  {
+    this.urlPath = this.base_Url.concat('addlabel');
+    return this.http.post<any>(this.urlPath, obj, this.httpOptions);
+  }
   postService(createnote, obj): Observable<any> {
     this.urlPath = this.noteUrl.concat(createnote);
     this.appendToken();
@@ -67,3 +78,5 @@ export class HttpService {
     return this.http.delete<any>(this.urlPath, this.httpOptions);
   }
 }
+
+

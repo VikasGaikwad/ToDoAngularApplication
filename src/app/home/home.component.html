@@ -26,9 +26,39 @@
             <a mat-button routerLink="/home/reminder" ><mat-icon>touch_app</mat-icon>Reminders</a>
            
         </div>
-      
+        <div>
+
+            <button mat-menu-item>
+              <span>Labels</span>
+
+              <button mat-button type="submit" (click)="openLabelDialog()" style="margin-left:40%;">
+                <b>EDIT</b>
+              </button>
+
+            </button>
+          </div>
+          <div *ngFor="let label of labels">
+            <div>
+              <button mat-menu-item>
+                <mat-icon>label</mat-icon>
+                <span>{{label.labelName}}</span>
+              </button>
+            </div>
+          </div>
+          <div>
+
+            <button mat-menu-item (click)="openLabelDialog()">
+              <mat-icon>add</mat-icon>
+              <span>Create new lable</span>
+            </button>
+          </div>
+
+        
 
         </mat-sidenav>
+
+
+       
 
         <!-- The <router-outlet> tells the router where to display routed views. -->
         <router-outlet> </router-outlet>
