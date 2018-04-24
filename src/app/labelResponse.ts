@@ -1,5 +1,5 @@
 
-export class Label {
+export class LabelResponse {
     labelId: number;
    labelName: String;
 }

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Headers } from '@angular/http/src/headers';
 import { Observable } from 'rxjs/Observable';
-
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { NoteResponse } from './noteResponse';
+import {LabelResponse } from './labelResponse';
+
 //  The @Injectable() decorator tells Angular that this service
 //  might itself have injected dependencies.
 
@@ -65,6 +66,11 @@ export class HttpService {
     this.appendToken();
     return this.http.get<NoteResponse[]>(this.urlPath , this.httpOptions);
   }
+  getServiceLabel(path): Observable<any> {
+    this.urlPath = this.base_Url.concat(path);
+    this.appendToken();
+      return this.http.get<LabelResponse[]>(this.urlPath, this.httpOptions);
+    }
 
   putService(updatenote, note): Observable<any> {
     this.urlPath = this.base_Url.concat(updatenote);
@@ -77,6 +83,12 @@ export class HttpService {
     this.urlPath = this.base_Url.concat(path);
     return this.http.delete<any>(this.urlPath, this.httpOptions);
   }
+  // getLabels(): Observable<any> {
+
+  //   return this.http.getService('getLabels');
+
+  // }
+
 }
 
 

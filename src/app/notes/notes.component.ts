@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { NoteResponse } from '../noteResponse';
+import { LabelNavComponent } from '../label-nav/label-nav.component';
+import { LabelResponse } from '../labelResponse';
 
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { NoteResponse } from '../noteResponse';
 
 export class NotesComponent implements OnInit {
   // get all html page data
-
+  labels: LabelResponse[];
   pinSVG = '/assets/pin.svg';
   color_blue = '/assets/icon/blue.png';
   color_brown = '/assets/icon/brown.png';
@@ -56,7 +58,7 @@ export class NotesComponent implements OnInit {
   // show: boolean = false;
   response: any = {};
   notes: NoteResponse[];
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.http.getService('readallnotes').subscribe(response => {
@@ -64,6 +66,14 @@ export class NotesComponent implements OnInit {
     console.log(this.notes);
     });
   }
+
+//   ngOnInit() {
+//     this.commonService.getService('getNotes').subscribe(res => {
+//     this.notes = res;
+//   });
+// }
+
+
  createnote(): void {
     console.log('createnote', this.model);
     // this.noteService.create()
@@ -107,18 +117,8 @@ export class NotesComponent implements OnInit {
         console.log(response);
     });
 
-    // colornote(note, color): void {
-    //   note.color = color;
-    //   // console.log
-    //   this.http.putService('updatenote', note).subscribe(this.response = response;
-    //   console.log(response);
-    //   )
-    // }
+
     }
-
-
-
-
     reminder(note, day): void {
       if (day === 'Today') {
             this.today = new Date();
@@ -151,6 +151,31 @@ export class NotesComponent implements OnInit {
 
 
     }
+    openLabelDialog(label) {
+      this.dialog.open(LabelNavComponent,
+          {
+           height: '325px',
+             width: '280px',
+            data : {
+              labels : this.labels
+          }
+           });
+         }
+
+        //  getLabels() {
+        //   this.http.getLabels().subscribe(res => {
+        //      this.labels = res;
+        //      console.log(this.labels);
+        //     });
+        // }
+
+        readLabels() {
+          console.log('message---------');
+          this.http.getServiceLabel('readLabel').subscribe(res => {
+            this.labels = res.body;
+            console.log('data', this.labels);
+          });
+        }
 
   }
 

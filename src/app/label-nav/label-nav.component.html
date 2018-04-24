@@ -1,31 +1,22 @@
-<!-- <div fxLayout="column" fxLayoutGap="20px">
-
-  <div><b>Edit labels :</b></div>
-  <div>
-     <mat-form-field >
-      <input matInput placeholder="Create new label" [(ngModel)]="model.labelName">
-     </mat-form-field>
-  </div>
-  <div><button type="submit" (click)="createLabel(label)" mat-raised-button>Done</button></div>
-</div> -->
 <div fxLayout="column" fxLayoutGap="20px" style="left: 493.5px; top: 60.5px;">
 
-  <div><b>Edit labels </b></div>
   <div>
-       <div class='inline'>
-           <img style="margin-right: 10px;height: 17px;margin-top: 10px;" src="{{clearImg}}" matTooltip="cancel" (click)="deleteLabel(label.labelId)">
-           
-           <!-- <div contenteditable="true" data-text="Take a note..." class="editable"></div> -->
-             <input style="outline: none;border:none;" contenteditable="true" matInput placeholder="Create new label" [(ngModel)]="model.labelName">
-            <img style="margin-right: 10px;height: 17px;margin-top: 10px;"matTooltip="create label" src="{{checkImg}}" (click)=" createLabel(label)">
-           </div> 
-            <ul>
-            <li *ngFor="let label of labels"> 
-              {{label.labelName}}
-            </li>
-            </ul> 
-         </div>
-  <div flexLayout="row" fxLayoutAlign="end" >
+    <b>Edit labels </b>
+  </div>
+  <div>
+
+    <div>
+      <img style="margin-right: 10px;height: 17px;margin-top: 10px;">
+      <input style="outline: none;border:none;" contenteditable="true" matInput placeholder="Create new label" [(ngModel)]="model.labelName">
+      <img style="margin-right: 10px;height: 17px;margin-top: 10px;" matTooltip="create label" src="{{checkImg}}" (click)=" createLabel(label)">
+    </div>
+    <ul>
+      <li *ngFor="let label of labels">
+        {{label.labelName}}
+      </li>
+    </ul>
+  </div>
+  <div flexLayout="row" fxLayoutAlign="end">
     <button type="submit" (click)="createLabel()" mat-raised-button style="margin-top: 160px;">Done</button>
   </div>
 </div>

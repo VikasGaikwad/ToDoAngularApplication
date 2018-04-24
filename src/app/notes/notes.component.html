@@ -30,7 +30,7 @@
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
       <div *ngFor="let note of notes">
         <div *ngIf="note.trash===false && note.archive===false && note.pin===true">
-          <mat-card fxFlex="265px">
+          <mat-card fxFlex="265px" [style.background]="note.color">
             <div (click)="pinnote(note,'false')" style="margin-left: 200px;">
               <img src="{{pinSVG}}">
 
@@ -53,24 +53,42 @@
               </div>
             </div>
             <div fxLayout="row" fxLayoutAlign="end end">
-
-
-
-
-
-
-
-
-
               <mat-menu #appMenu="matMenu">
                 <button mat-menu-item (click)="trashnote(note,'true')">Delete note</button>
 
-                <button mat-menu-item>*******</button>
+                <!-- <button mat-menu-item>Change Label<button mat-menu-item>Change Label</button> -->
+                <!-- </button> -->
+
+                <div>
+                  <button type="submit" mat-menu-item [matMenuTriggerFor]="label" (click)="readLabels()">
+                    <span>change label</span>
+                  </button>
+                </div>
+                <mat-menu #label="matMenu">
+
+                  <div fxLayout="column" fxLayoutGap="20px">
+                    <div>
+                      <b>label note</b>
+                    </div>
+                    <div>
+                      <mat-form-field>
+                        <input matInput placeholder="Search name">
+                      </mat-form-field>
+                    </div>
+                    <div *ngIf="labels!=null">
+                      <div *ngFor="let label of labels">
+                        <label>
+                          <input type="checkbox" name="labels" value="{{label.labelName}}" [(ngModel)]="label.checked" (ngModelChange)="addLabelOnNote($event, label.labelId, note.noteId)"
+                          /> {{label.labelName}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </mat-menu>
+
+
+
               </mat-menu>
-
-
-
-
               <mat-menu #touch="matMenu">
                 <button mat-menu-item (click)="reminder(note,'Today')">Later Today 8PM</button>
                 <button mat-menu-item (click)="reminder(note,'Tomorrow')">Tomorrow</button>
@@ -109,11 +127,6 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
               </div>
-
-
-
-
-
             </div>
           </mat-card>
         </div>
@@ -124,13 +137,14 @@
   </div>
 
 
+
   <!------------------------- note div------------ -->
   <div fxLayoutAlign="center center" class="class-container">
 
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
       <div *ngFor="let note of notes">
         <div *ngIf="note.trash===false && note.archive===false && note.pin===false">
-          <mat-card fxFlex="265px">
+          <mat-card fxFlex="265px" [style.background]="note.color">
             <div (click)="pinnote(note,'true')" style="margin-left: 165px;">
               <img src="{{pinSVG}}">
 
@@ -160,6 +174,7 @@
 
               <mat-menu #appMenu="matMenu">
                 <button mat-menu-item (click)="trashnote(note,'true')">Delete note</button>
+                <button mat-menu-item [matMenuTriggerFor]="appMenu">Change Label</button>
 
               </mat-menu>
               <mat-menu #touch="matMenu">
