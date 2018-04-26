@@ -1,10 +1,15 @@
+import { Injectable } from '@angular/core';
+
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { NoteResponse } from '../noteResponse';
 import { LabelNavComponent } from '../label-nav/label-nav.component';
 import { LabelResponse } from '../labelResponse';
+import { LabelService } from '../commonservices/label.service';
+
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 
 @Component({
@@ -58,7 +63,7 @@ export class NotesComponent implements OnInit {
   // show: boolean = false;
   response: any = {};
   notes: NoteResponse[];
-  constructor(private http: HttpService, public dialog: MatDialog) { }
+  constructor(private http: HttpService, public dialog: MatDialog, private labelObj: LabelService) { }
 
   ngOnInit() {
     this.http.getService('readallnotes').subscribe(response => {
@@ -74,15 +79,7 @@ export class NotesComponent implements OnInit {
 // }
 
 
- createnote(): void {
-    console.log('createnote', this.model);
-    // this.noteService.create()
-    this.http.postService('createnote', this.model)
-             .subscribe(response => {
-              this.response = response;
-               console.log(response);
-    });
-    }
+
     trashnote(note, status): void {
       note.trash = status;
 
@@ -162,12 +159,12 @@ export class NotesComponent implements OnInit {
            });
          }
 
-        //  getLabels() {
-        //   this.http.getLabels().subscribe(res => {
-        //      this.labels = res;
-        //      console.log(this.labels);
-        //     });
-        // }
+         collaboratorDialogBox() {
+           this.dialog.open(CollaboratorComponent, {
+             height: '300px',
+             width: '200px'
+           });
+         }
 
         readLabels() {
           console.log('message---------');
@@ -176,6 +173,22 @@ export class NotesComponent implements OnInit {
             console.log('data', this.labels);
           });
         }
+        createnote(): void {
+          console.log('createnote', this.model);
+          // this.noteService.create()
+          this.http.postService('createnote', this.model)
+                   .subscribe(response => {
+                    this.response = response;
+                     console.log(response);
+          });
+          }
+        addLabelOnNote(labelId, noteId, checked) {
+
+          this.labelObj.addLabelOnNote(labelId, noteId, checked);
+          console.log('labelId-', labelId, 'noteId-', noteId, 'checked-', checked);
+
+          }
+
 
   }
 

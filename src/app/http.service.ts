@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { NoteResponse } from './noteResponse';
 import {LabelResponse } from './labelResponse';
-
 //  The @Injectable() decorator tells Angular that this service
 //  might itself have injected dependencies.
 
@@ -24,13 +23,15 @@ export class HttpService {
     // observe: 'response'
     observe: 'response' as 'response'
   };
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, ) {
   }
+
   appendToken(): void {
     console.log(localStorage.getItem('Authorization'));
 
     if ( localStorage.getItem('Authorization') ) {
      // localStorage.removeItem('Authorization');
+
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
     }
   }
@@ -44,22 +45,21 @@ export class HttpService {
     this.urlPath = this.noteUrl.concat(loginUrl);
     return this.http.post<any>(this.urlPath, userObj, this.httpOptions);
   }
-  // postServiceData(noteUrl,obj): Observable<HttpResponse<any>>{ //login,register,createNote,createcollaborator
-  //   console.log(path,model);
-  //   this.addAuthorization();
-  //   this.urlpath= this.base_url.concat(path);
-  //   console.log(this.urlpath);
-  //   return this.http.post<any>(this.urlpath,obj,this.httpOptions);
+  // createHeader(header: Headers) {
+  //   header.append('Authorization', localStorage.getItem('Authorization'));
+  // }
+  // putService1(path): Observable<any> {
+  //   const header = new Headers();
+  //   this.createHeader(header);
+  //   return this.http.post(path, {
+  //     header: header
+  //   });
   // }
   postserviceLabel(createLabel, obj): Observable<any>  {
     this.urlPath = this.base_Url.concat('addlabel');
     return this.http.post<any>(this.urlPath, obj, this.httpOptions);
   }
-  postService(createnote, obj): Observable<any> {
-    this.urlPath = this.noteUrl.concat(createnote);
-    this.appendToken();
-    return this.http.post<any>(this.urlPath, obj, this.httpOptions);
-  }
+
   // getService(readallnotes): Observable<NoteResponse[]> {
   getService(readallnotes): Observable<any> {
     this.urlPath = this.base_Url.concat(readallnotes);
@@ -83,12 +83,18 @@ export class HttpService {
     this.urlPath = this.base_Url.concat(path);
     return this.http.delete<any>(this.urlPath, this.httpOptions);
   }
-  // getLabels(): Observable<any> {
 
-  //   return this.http.getService('getLabels');
+  postService(createnote, obj): Observable<any> {
+    this.urlPath = this.noteUrl.concat(createnote);
+    this.appendToken();
+    return this.http.post<any>(this.urlPath, obj, this.httpOptions);
+  }
 
-  // }
+  putService1(path): Observable<any> {
+
+    this.urlPath = this.base_Url.concat(path);
+      this.appendToken();
+    return this.http.put<any>(this.urlPath, {}, this.httpOptions);
+  }
 
 }
-
-

@@ -14,7 +14,7 @@ import {FormControl, Validators} from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpService} from '../app/http.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -23,10 +23,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {CanActivate} from '@angular/router';
+
 // import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 // AppComponent is import for loaing components in @NgModel from app.component.ts
 // LoginComponent is import for loaing components in @NgModel from login/login.component.ts
 // RegisterComponent is import for loaing components in @NgModel from register/register.component.ts
+
+import { LabelService } from './commonservices/label.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -40,6 +43,7 @@ import { RemindersComponent } from './reminders/reminders.component';
 import { AuthGuard } from './auth/AuthGuard';
 import { LabelNavComponent } from './label-nav/label-nav.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { CollaboratorComponent } from './collaborator/collaborator.component';
 // import { HomeNewComponent } from './home-new/home-new.component';
 
 
@@ -59,7 +63,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     TrashComponent,
     ArchiveComponent,
     RemindersComponent,
-    LabelNavComponent
+    LabelNavComponent,
+    CollaboratorComponent,
+
 
   ],
   imports: [
@@ -79,14 +85,16 @@ import {MatDialogModule} from '@angular/material/dialog';
     FlexLayoutModule,
     MatMenuModule,
     MatChipsModule,
-    MatDialogModule
+    MatDialogModule,
+    // HttpClient
+
     // MatDialogRef
 
 
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
   entryComponents: [LabelNavComponent],
-  providers: [HttpService, AuthGuard],
+  providers: [HttpService, AuthGuard, LabelService ],
   bootstrap: [AppComponent]
 })
 

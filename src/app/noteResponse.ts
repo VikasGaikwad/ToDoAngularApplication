@@ -7,4 +7,5 @@ archive: boolean;
 pin: boolean;
 reminder: Date;
 color: string;
+checked: boolean;
 }
