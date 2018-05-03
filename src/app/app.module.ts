@@ -29,21 +29,25 @@ import {CanActivate} from '@angular/router';
 // LoginComponent is import for loaing components in @NgModel from login/login.component.ts
 // RegisterComponent is import for loaing components in @NgModel from register/register.component.ts
 
-import { LabelService } from './commonservices/label.service';
+import { LabelService } from './service/label.service';
+import { NoteserviceService } from './service/noteservice.service';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { NotesComponent } from './notes/notes.component';
-import { ForgotComponent } from './forgot/forgot.component';
-import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { HomeComponent } from './home/home.component';
-import { TrashComponent } from './trash/trash.component';
-import { ArchiveComponent } from './archive/archive.component';
-import { RemindersComponent } from './reminders/reminders.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { NotesComponent } from './component/notes/notes.component';
+import { ForgotComponent } from './component/forgot/forgot.component';
+import { ResetpasswordComponent } from './component/resetpassword/resetpassword.component';
+import { HomeComponent } from './component/home/home.component';
+import { TrashComponent } from './component/trash/trash.component';
+import { ArchiveComponent } from './component/archive/archive.component';
+import { RemindersComponent } from './component/reminders/reminders.component';
 import { AuthGuard } from './auth/AuthGuard';
-import { LabelNavComponent } from './label-nav/label-nav.component';
+import { LabelNavComponent } from './component/label-nav/label-nav.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { CollaboratorComponent } from './collaborator/collaborator.component';
+import { CollaboratorComponent } from './component/collaborator/collaborator.component';
+import { UploadService } from './service/upload.service';
+import { UserService } from './service/user.service';
+import { CollaboratorService } from './service/collaborator.service';
 // import { HomeNewComponent } from './home-new/home-new.component';
 
 
@@ -64,7 +68,7 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
     ArchiveComponent,
     RemindersComponent,
     LabelNavComponent,
-    CollaboratorComponent,
+    CollaboratorComponent
 
 
   ],
@@ -93,8 +97,9 @@ import { CollaboratorComponent } from './collaborator/collaborator.component';
 
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
-  entryComponents: [LabelNavComponent],
-  providers: [HttpService, AuthGuard, LabelService ],
+  // entry component used to display dialog box.
+  entryComponents: [LabelNavComponent, CollaboratorComponent],
+  providers: [HttpService, AuthGuard, LabelService, UploadService, NoteserviceService, UserService, CollaboratorService],
   bootstrap: [AppComponent]
 })
 

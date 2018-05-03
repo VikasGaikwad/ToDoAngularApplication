@@ -1,5 +1,5 @@
 export class NoteResponse {
-    noteId: number;
+noteId: number;
 title: string;
 description: string;
 trash: boolean;
@@ -8,4 +8,11 @@ pin: boolean;
 reminder: Date;
 color: string;
 checked: boolean;
+labels: Array<LabelObject>;
+image: any[];
+imageString: string;
+}
+export class LabelObject {
+    labelId: number;
+    labelName: string;
 }
