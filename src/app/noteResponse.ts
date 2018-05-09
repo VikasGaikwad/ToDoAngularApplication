@@ -11,8 +11,14 @@ checked: boolean;
 labels: Array<LabelObject>;
 image: any[];
 imageString: string;
+ collaborators: Array<CollaboratorObject>;
 }
 export class LabelObject {
     labelId: number;
     labelName: string;
+}
+export class CollaboratorObject {
+    cId: number;
+    sharedId: String;
+    noteId: number;
 }

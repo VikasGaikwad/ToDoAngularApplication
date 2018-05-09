@@ -42,10 +42,10 @@ import { LabelNavComponent } from './component/label-nav/label-nav.component';
 
 const routes: Routes = [
   {path : '' , redirectTo : 'login', pathMatch : 'full'},
-// {path : 'register', component : RegisterComponent},
+ {path : 'register', component : RegisterComponent},
 // { path : 'resetpassword', component : ResetpasswordComponent },
-// {path : 'forgot', component : ForgotComponent},
-  { path : 'login' , component : LoginComponent },
+ {path : 'forgot', component : ForgotComponent},
+  { path : 'login' , component : LoginComponent},
   { path : 'home' , component : HomeComponent,
     canActivate: [AuthGuard],
     children: [

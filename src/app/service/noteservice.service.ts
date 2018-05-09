@@ -9,7 +9,7 @@ export class NoteserviceService {
 
 
 
-  updateNote(note, status, field) {
+  updateNote(note, status?, field?) {
 
     if (field === 'pin') {
       note.pin = status;
@@ -42,7 +42,10 @@ export class NoteserviceService {
       console.log(response);
     });
   }
-
+  this.httpservice.putService('updatenote', note).subscribe( response => {
+    this.response = response;
+    console.log(response);
+  });
   }
   deleteImage(note) {
 this.httpservice.putService('updatenote', note).subscribe( response => {

@@ -15,25 +15,44 @@
 </div>  -->
 <div fxLayout="column" fxLayoutGap="20px">
 
-  <div><b>Collaborators</b></div>
+  <div>
+    <b>Collaborators</b>
+  </div>
+
+
   <div fxLayout="row">
-  <img src="/assets/icons/green.png" alt="Alternative text." width="42" height="42">
-  {{user?.email}}<span >(Owner)</span>
+    <img src="/assets/icons/green.png" alt="Alternative text." width="42" height="42"> 
+    {{user?.email}}
+    <span>(Owner)</span>
   </div>
-  <div *ngIf="data.collaborators!=null"> 
-  <div *ngFor="let collaborator of data.collaborators">
-  <mat-icon>account_circle</mat-icon>
-  <span>{{collaborator.sharedUserId.email}}</span>
-  <div fxLayoutAlign="end"><img style="margin-right: 8px;" src="{{clearSvg}}" (click)="removeCollaborator(collaborator.sharedUserId.email)">
-  </div>
-  </div>
-  </div>
-  
+
+
   <div fxLayout="row">
-  <mat-icon>person_add </mat-icon>
-  <mat-form-field>
-  <input matInput placeholder="Person or email to share with" name="sharedUser" [(ngModel)]="model.sharedUser">
-  </mat-form-field> 
+    <div *ngFor="let collaborator of collaborators"></div>
+    <img src="/assets/icons/lightyellow.png" alt="Alternative text." width="42" height="42"> 
+    <!-- {{collaborator.sharedId.email}} -->
+    print:  {{collaborator}}
+    <span>(Shared User)</span>
   </div>
-  <div><button type="submit" (click)="addcollaborator()" mat-raised-button>Done</button></div>
+
+
+  <!-- <div *ngIf="data.collaborators!=null">
+    <div *ngFor="let collaborator of data.collaborators">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{collaborator.sharedUserId.email}}</span>
+      <div fxLayoutAlign="end">
+        <img style="margin-right: 8px;" src="{{clearSvg}}" (click)="removeCollaborator(collaborator.sharedUserId.email)">
+      </div>
+    </div>
+  </div> -->
+
+  <div fxLayout="row">
+    <mat-icon>person_add </mat-icon>
+    <mat-form-field>
+      <input matInput placeholder="Person or email to share with" name="sharedUser" [(ngModel)]="model.sharedUser">
+    </mat-form-field>
   </div>
+  <div>
+    <button type="submit" (click)="addcollaborator()" mat-raised-button>Done</button>
+  </div>
+</div>

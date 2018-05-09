@@ -23,6 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {CanActivate} from '@angular/router';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 // import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 // AppComponent is import for loaing components in @NgModel from app.component.ts
@@ -48,6 +49,8 @@ import { CollaboratorComponent } from './component/collaborator/collaborator.com
 import { UploadService } from './service/upload.service';
 import { UserService } from './service/user.service';
 import { CollaboratorService } from './service/collaborator.service';
+import { UpdatenoteComponent } from './component/updatenote/updatenote.component';
+import { ColorToolDirective } from './color-tool.directive';
 // import { HomeNewComponent } from './home-new/home-new.component';
 
 
@@ -68,7 +71,9 @@ import { CollaboratorService } from './service/collaborator.service';
     ArchiveComponent,
     RemindersComponent,
     LabelNavComponent,
-    CollaboratorComponent
+    CollaboratorComponent,
+    UpdatenoteComponent,
+    ColorToolDirective
 
 
   ],
@@ -90,6 +95,8 @@ import { CollaboratorService } from './service/collaborator.service';
     MatMenuModule,
     MatChipsModule,
     MatDialogModule,
+    ShowHidePasswordModule.forRoot()
+
     // HttpClient
 
     // MatDialogRef
@@ -98,7 +105,7 @@ import { CollaboratorService } from './service/collaborator.service';
   ],
   // bootstrap:[AppComponent] is used to run AppComponent.
   // entry component used to display dialog box.
-  entryComponents: [LabelNavComponent, CollaboratorComponent],
+  entryComponents: [LabelNavComponent, CollaboratorComponent, UpdatenoteComponent],
   providers: [HttpService, AuthGuard, LabelService, UploadService, NoteserviceService, UserService, CollaboratorService],
   bootstrap: [AppComponent]
 })

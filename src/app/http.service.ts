@@ -6,6 +6,7 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { NoteResponse } from './noteResponse';
 import { LabelResponse } from './labelResponse';
 import { ImageResponse } from './imageResponse';
+import { environment} from '../environments/environment';
 //  The @Injectable() decorator tells Angular that this service
 //  might itself have injected dependencies.
 
@@ -13,11 +14,10 @@ import { ImageResponse } from './imageResponse';
 
 @Injectable()
 export class HttpService {
-  base_Url = 'http://localhost:8080/ToDoApplication/user/';
-  noteUrl = 'http://localhost:8080/ToDoApplication/';
+
   urlPath: string;
   httpOptions = {
-    headers: new HttpHeaders({
+    headers : new HttpHeaders({
       'Content-Type': 'application/json'
     }),
     observe: 'response' as 'response'
@@ -45,34 +45,34 @@ export class HttpService {
   // Client adapter.
 
   postServiceLogin(loginUrl, userObj): Observable<any> {
-    this.urlPath = this.noteUrl.concat(loginUrl);
+    this.urlPath = environment.base_Url.concat(loginUrl);
     return this.http.post<any>(this.urlPath, userObj, this.httpOptions);
   }
   // -------------------------------------------------------------------
 
   postserviceLabel(createLabel, obj): Observable<any> {
-    this.urlPath = this.base_Url.concat('addlabel');
+    this.urlPath = environment.noteUrl.concat('addlabel');
     return this.http.post<any>(this.urlPath, obj, this.httpOptions);
   }
 
   // -------------------------------------------------------------------
 
   getService(path): Observable<any> {
-    this.urlPath = this.base_Url.concat(path);
+    this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     return this.http.get<NoteResponse[]>(this.urlPath, this.httpOptions);
   }
   // -------------------------------------------------------------------
 
   getServiceLabel(path): Observable<any> {
-    this.urlPath = this.base_Url.concat(path);
+    this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     return this.http.get<LabelResponse[]>(this.urlPath, this.httpOptions);
   }
   // -------------------------------------------------------------------
 
   putService(path, note): Observable<any> {
-    this.urlPath = this.base_Url.concat(path);
+    this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     return this.http.put<any>(this.urlPath, note, this.httpOptions);
   }
@@ -82,7 +82,7 @@ export class HttpService {
 
   deleteService(path): Observable<any> {
 
-    this.urlPath = this.base_Url.concat(path);
+    this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     return this.http.delete<any>(this.urlPath, this.httpOptions);
   }
@@ -94,15 +94,15 @@ export class HttpService {
   //   return this.http.post<any>(this.urlPath, obj, this.httpOptions);
   // }
   postService(path, obj): Observable<any> {
-    this.urlPath = this.base_Url.concat(path);
-    this.appendToken();
-    return this.http.post<any>(this.urlPath, obj, this.httpOptions);
+    this.urlPath = environment.noteUrl.concat(path);
+  //  this.appendToken();
+    return this.http.post<any>(this.urlPath, obj, this.httpOptions );
   }
   // -------------------------------------------------------------------
 
   putService1(path): Observable<any> {
 
-    this.urlPath = this.base_Url.concat(path);
+    this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     return this.http.put<any>(this.urlPath, {}, this.httpOptions);
   }
@@ -116,7 +116,7 @@ export class HttpService {
   // -------------------------------------------------------------------
 
   postImageService(path, file, noteId): Observable<any> {
-    this.urlPath = this.base_Url.concat(path);
+    this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     const formdata: FormData = new FormData();
     const x = file[0];
@@ -133,7 +133,7 @@ export class HttpService {
     return this.http.post<any>(this.urlPath, formdata, httpOptions2);
   }
   deleteImageService(path, noteId): Observable<any> {
-    this.urlPath = this.base_Url.concat(path);
+    this.urlPath = environment.noteUrl.concat(path);
     return this.http.delete<any>(this.urlPath,  this.httpOptions);
   }
 

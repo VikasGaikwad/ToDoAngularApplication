@@ -1,26 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {HttpService} from '../../http.service';
 import { NoteResponse } from '../../noteResponse';
+import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-reminders',
   templateUrl: './reminders.component.html',
   styleUrls: ['./reminders.component.css']
 })
-export class RemindersComponent implements OnInit {
+export class RemindersComponent implements OnInit, OnDestroy {
   notes: NoteResponse[];
   model: any = {};
   response: any = {};
   today: Date;
 
     constructor(private http: HttpService ) { }
+    todo: Subscription;
     ngOnInit() {
       // localStorage.getItem('Authorization');
-      this.http.getService('readallnotes').subscribe(response => {
+  this.todo =    this.http.getService('readallnotes').subscribe(response => {
         this.notes = response.body;
       });
-
-
-
+    }
+    ngOnDestroy(): void {
+this.todo.unsubscribe();
     }
     reminder(note, day): void {
       if (day === 'Today') {

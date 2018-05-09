@@ -1,0 +1,9 @@
+
+<div>
+<div #title id="update-title" contenteditable="true" data-text="title" name="title" (input)="data.title=$event.target.innerHTML"></div>
+<div #description id="update-description" contenteditable="true" data-text="description" name="description" (input)="data.description=$event.target.innerHTML"></div>
+
+<div>
+  <button  (click)="updateNote(note)">close</button>
+</div>
+</div>

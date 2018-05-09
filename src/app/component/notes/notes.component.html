@@ -29,22 +29,33 @@
       <div *ngFor="let note of notes">
         <div *ngIf="note.trash===false && note.archive===false && note.pin===true">
           <!-- display image on note -->
-          <div *ngIf="note.image">
-            <img [src]="note.imageString"/>
+          <!-- <div *ngIf="note.image">
+            <img [src]="note.imageString" />
             <mat-icon (click)="deleteImage(note)">close</mat-icon>
-          </div> 
-          
+          </div> -->
+
           <mat-card fxFlex="265px" [style.background]="note.color">
+              <div *ngIf="note.image">
+                  <img [src]="note.imageString" width="235px" />
+                  <mat-icon (click)="deleteImage(note)">close</mat-icon>
+                </div>
             <div (click)="updateNote(note,'false','pin')" style="margin-left: 200px;">
               <img [src]="pinSVG">
 
+
+              
             </div>
-            
-            <mat-card-title><b>{{note.title}}</b></mat-card-title>
-            <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
-           
+            <!--mat card dialog-->
+            <mat-card-title (click)="openNoteDialog(note)">
+              <b style="word-wrap: break-word;">{{note.title}}</b>
+            </mat-card-title>
+            <mat-card-subtitle (click)="openNoteDialog(note)">{{note.description}}</mat-card-subtitle>
+            <!--mat card dialog-->
+
+
+
             <!-- ---------reminder chip------------ -->
-            
+
             <div *ngIf="note.reminder!=null">
               <div mat-menu-item>
                 <mat-chip-list>
@@ -63,8 +74,8 @@
               <div *ngFor="let label of note.labels">
                 <div mat-menu-item>
                   <mat-chip-list>
-                    <mat-chip selected="true">                      
-                     
+                    <mat-chip selected="true">
+
                       <label>{{label.labelName}}</label>
                       <mat-icon (click)="updateNote(label,'false','close')">close</mat-icon>
                     </mat-chip>
@@ -75,12 +86,12 @@
 
 
 
-<!-- ------------trashnote------------ -->
+            <!-- ------------trashnote------------ -->
 
             <div fxLayout="row" fxLayoutAlign="end end">
               <mat-menu #appMenu="matMenu">
                 <button mat-menu-item (click)="updateNote(note,'true', 'trash')">Delete note</button>
- <div>
+                <div>
                   <button type="submit" mat-menu-item [matMenuTriggerFor]="label" (click)="readLabels()">
                     <span>change label</span>
                   </button>
@@ -118,26 +129,19 @@
 
 
 
-<!-- 
-              <input type='file' (change)="readUrl($event)">
-              <img [src]="url"> -->
+
 
               <div class="form-group">
                 <button mat-icon-button>
                   <mat-icon for="file">photo</mat-icon>
-               
-                <input type="file" id="file" (change)="handleFileInput($event.target.files,note.noteId)">
 
-              </button>
+                  <input type="file" id="file" (change)="handleFileInput($event.target.files,note.noteId)">
+
+                </button>
               </div>
 
 
 
-             <!-- <div>
-                    <button mat-icon-button>
-                      <mat-icon>photo</mat-icon>
-                    </button>
-                  </div>  -->
 
 
               <!-- collaborator -->
@@ -210,7 +214,7 @@
             <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
 
 
-            
+
             <div *ngIf="note.reminder!=null">
               <div mat-menu-item>
                 <mat-chip-list>
@@ -223,12 +227,12 @@
               </div>
             </div>
 
-<div *ngIf="note.labels!=null">
+            <div *ngIf="note.labels!=null">
               <div *ngFor="let label of note.labels">
                 <div mat-menu-item>
                   <mat-chip-list>
                     <mat-chip selected="true">
-                      
+
                       <label>{{label.labelId}}</label>
                       <label>{{label.labelName}}</label>
                       <mat-icon (click)="labelName(label,'false')">close</mat-icon>
@@ -242,7 +246,7 @@
             <div fxLayout="row" fxLayoutAlign="end end">
               <mat-menu #appMenu="matMenu">
                 <button mat-menu-item (click)="updateNote(note,'true', 'trash')">Delete note</button>
- <div>
+                <div>
                   <button type="submit" mat-menu-item [matMenuTriggerFor]="label" (click)="readLabels()">
                     <span>change label</span>
                   </button>

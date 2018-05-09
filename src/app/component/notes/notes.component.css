@@ -5,8 +5,12 @@
     margin-right: 20px;
    
   }
-
-
+  .editable {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    outline: none;
+    line-height: 20px; 
+    } 
 
 
 

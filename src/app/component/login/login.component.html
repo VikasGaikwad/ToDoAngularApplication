@@ -1,29 +1,33 @@
-
 <body>
-  <h2>Login Form</h2>
-  <!-- However instead of issuing a standard POST we want to call a function on our component instead, 
-  to do that we use the ngSubmit directive and add it to the form element -->
-  <form (ngSubmit)="login()">
-  <div class="loginContainer">
-    <mat-form-field>
-      <input  matInput placeholder="Enter Email Id" name="email" [(ngModel)]="model.email" required>
-    </mat-form-field>
-  </div>
+    
+    <!-- However instead of issuing a standard POST we want to call a function on our component instead, 
+    to do that we use the ngSubmit directive and add it to the form element -->
+    <form (ngSubmit)="login()">
+        <h2>Login Form</h2>
+    <div class="loginContainer">
+      <mat-form-field>
+        <input  matInput placeholder="Enter Email Id" name="email" [(ngModel)]="model.email" required>
+      </mat-form-field>
+    </div>
+    
+    <div class="loginContainer">
+      <mat-form-field>
+        <input type="password" matInput placeholder="Enter Password" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="model.password" required >
+      </mat-form-field>
+    </div>
+    
   
-  <div class="loginContainer">
-    <mat-form-field>
-      <input type="password" matInput placeholder="Enter Password" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="model.password" required >
-    </mat-form-field>
-  </div>
-  
-
-  
-  <div class="btn2" >
-    <a mat-button routerLink="/register" mat-raised-button color="primary">Register</a>
-    <button type="submit"  mat-raised-button color="primary">login</button>
-  
-      
-    <a href="forgot">forget password</a>
-  </div>
-</form>
-  </body>
+    
+    <div class="btn2" fxLayout="row" fxLayoutAlign="start end">
+      <div>
+      <button type="submit"  mat-raised-button color="primary">login</button>
+      <a href="register">Register</a>
+      </div>
+     
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">        
+        <a href="forgot">forget password..?</a>
+      </div>
+    
+  </form>
+    </body>

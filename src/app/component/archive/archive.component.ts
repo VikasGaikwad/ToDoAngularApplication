@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpService } from '../../http.service';
 import { NoteResponse } from '../../noteResponse';
+import { SubscriptionList } from '@angular/flex-layout';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-archive',
   templateUrl: './archive.component.html',
   styleUrls: ['./archive.component.css']
 })
-export class ArchiveComponent implements OnInit {
+export class ArchiveComponent implements OnInit, OnDestroy {
 response: any = {};
 notes: NoteResponse[];
   constructor(private http: HttpService ) { }
-
+  todo: Subscription;
   ngOnInit() {
-    this.http.getService('readallnotes').subscribe(response => {
+  this.todo =  this.http.getService('readallnotes').subscribe(response => {
       this.notes = response.body;
       console.log(this.notes);
       });
+  }
+  ngOnDestroy() {
+    this.todo.unsubscribe();
   }
 
   trashnote(note, status): void {

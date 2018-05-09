@@ -1,5 +1,6 @@
 export class CollaboratorResponse {
-    collaboratorId: number;
-    sharedUserId: String;
+    cId: number;
+    sharedId: String;
     noteId: number;
+    ownerId: number;
 }

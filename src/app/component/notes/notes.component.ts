@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, Inject, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../http.service';
 import { NoteResponse } from '../../noteResponse';
@@ -10,6 +10,8 @@ import { ImageResponse } from '../../imageResponse';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteserviceService } from '../../service/noteservice.service';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
+import { UpdatenoteComponent } from '../updatenote/updatenote.component';
+import { Subscription } from 'rxjs/Subscription';
 
 // -------------------------------------------------------------------
 
@@ -20,7 +22,7 @@ import { CollaboratorComponent } from '../collaborator/collaborator.component';
 })
 // -------------------------------------------------------------------
 
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
   labels: LabelResponse[];
   object: ImageResponse;
   model: any = {};
@@ -70,10 +72,14 @@ export class NotesComponent implements OnInit {
   // -------------------------------------------------------------------
 
   constructor(private http: HttpService, public dialog: MatDialog, private noteService: NoteserviceService,
-     private labelObj: LabelService, private uploadService: UploadService) { }
+    private labelObj: LabelService, private uploadService: UploadService) { }
+
+
+  todo: Subscription;
+
 
   ngOnInit() {
-    this.http.getService('readallnotes').subscribe(response => {
+    this.todo = this.http.getService('readallnotes').subscribe(response => {
       this.notes = response.body;
       this.notes.forEach(note => {
         note.imageString = 'data:image/jpg;base64,' + note.image;
@@ -82,10 +88,14 @@ export class NotesComponent implements OnInit {
       console.log(this.notes);
     });
   }
+  ngOnDestroy(): void {
+    this.todo.unsubscribe();
+
+  }
 
   updateNote(note, status, field) {
 
-        this.noteService.updateNote(note, status, field);
+    this.noteService.updateNote(note, status, field);
   }
   // -------------------------------------------------------------------
 
@@ -140,9 +150,9 @@ export class NotesComponent implements OnInit {
 
   collaboratorDialogBox(note) {
     this.dialog.open(CollaboratorComponent, {
-       height: '250px',
-       width: '500px',
-       data : note
+      height: '250px',
+      width: '500px',
+      data: note
     });
   }
 
@@ -158,7 +168,11 @@ export class NotesComponent implements OnInit {
   }
 
   // -------------------------------------------------------------------
-
+  refreshNote(path) {
+    this.http.getService('readallnotes').subscribe(response => {
+      this.notes = response.body;
+    });
+  }
 
 
   createnote(): void {
@@ -168,15 +182,16 @@ export class NotesComponent implements OnInit {
       .subscribe(response => {
         this.response = response;
         console.log(response);
+        this.refreshNote('getNotes');
       });
   }
 
 
   deleteImage(note): void {
-// this.noteService.deleteImage(noteId) {
-note.image = null;
-this.noteService.deleteImage(note);
-console.log('deleting image from noteId - ', note);
+    // this.noteService.deleteImage(noteId) {
+    note.image = null;
+    this.noteService.deleteImage(note);
+    console.log('deleting image from noteId - ', note);
 
   }
   // -------------------------------------------------------------------
@@ -184,10 +199,10 @@ console.log('deleting image from noteId - ', note);
 
   addLabelOnNote(labelId, noteId, checked) {
     this.labelObj.addLabelOnNote(labelId, noteId, checked)
-    .subscribe(response => {
-      console.log('successfull', response.body);
+      .subscribe(response => {
+        console.log('successfull', response.body);
 
-    });
+      });
     console.log('labelId-', labelId, 'noteId-', noteId, 'checked-', checked);
   }
 
@@ -203,6 +218,14 @@ console.log('deleting image from noteId - ', note);
     // this.object.noteId = noteId;
     // this.uploadService.handleFileInput(this.object);
 
+  }
+
+  openNoteDialog(note) {
+    this.dialog.open(UpdatenoteComponent, {
+      data: note,
+      height: '300px',
+      width: '500px'
+    });
   }
 
 }

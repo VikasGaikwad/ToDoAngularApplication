@@ -1,26 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {HttpService} from '../../http.service';
 import { NoteResponse } from '../../noteResponse';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-trash',
   templateUrl: './trash.component.html',
   styleUrls: ['./trash.component.css']
 })
-export class TrashComponent implements OnInit {
+export class TrashComponent implements OnInit, OnDestroy {
 notes: NoteResponse[];
 model: any = {};
 response: any = {};
   constructor(private http: HttpService ) { }
 
+
+  todo: Subscription;
   ngOnInit() {
     // localStorage.getItem('Authorization');
-    this.http.getService('readallnotes').subscribe(response => {
+   this.todo = this.http.getService('readallnotes').subscribe(response => {
       this.notes = response.body;
     });
-
-
-
+  }
+  ngOnDestroy(): void {
+   this.todo.unsubscribe();
   }
   deletenote(noteId): void {
 this.http.deleteService('deletenote/' + noteId).subscribe(response => {

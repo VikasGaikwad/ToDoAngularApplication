@@ -1,0 +1,12 @@
+import { ColorToolDirective } from './color-tool.directive';
+import { Directive, ElementRef, Input, AfterViewInit} from '@angular/core';
+import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
+import 'rxjs/add/operator/pairwise';
+
+
+describe('ColorToolDirective', () => {
+  it('should create an instance', () => {
+    const directive = new ColorToolDirective(ActivatedRoute, ElementRef, Router);
+    expect(directive).toBeTruthy();
+  });
+});

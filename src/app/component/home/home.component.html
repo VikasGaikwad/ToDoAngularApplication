@@ -1,6 +1,6 @@
 
 
-    <mat-toolbar style="background-color:rgb(255, 217, 0)">
+    <mat-toolbar style="background-color:rgb(255, 217, 0)" appColorTool>
             <div fxLayout="row">               
                 <div> 
                     <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon> </button>
@@ -29,10 +29,16 @@
        <hr>
        <button mat-raised-button>create account</button>
        <div fxLayout="row" style="margin-left: 50%;">
-            
+           
+        
+
+
+
+
+        
             <button mat-raised-button (click)="signOut()">SignOut</button>
        </div>
-    </mat-menu> -->
+    </mat-menu>
 
 
 
@@ -63,6 +69,8 @@
                 <b>EDIT</b>
               </button>
 
+
+              
             </button>
           </div>
           <div *ngFor="let label of labels">

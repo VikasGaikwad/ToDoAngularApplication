@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { HttpService } from '../../http.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { LabelResponse } from '../../labelResponse';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-label-nav',
@@ -11,22 +12,27 @@ import { LabelResponse } from '../../labelResponse';
 
 // -------------------------------------------------------------------
 
-export class LabelNavComponent implements OnInit {
+
+export class LabelNavComponent implements OnInit, OnDestroy {
   model: any = {};
   @Input() labels: LabelResponse[];
   // -------------------------------------------------------------------
 
   constructor(private http: HttpService, public MatRef: MatDialogRef<LabelNavComponent>) { }
-
+  todo: Subscription;
   // -------------------------------------------------------------------
 
   ngOnInit() {
-    this.http.getServiceLabel('readLabel').subscribe(response => {
+   this.todo = this.http.getServiceLabel('readLabel').subscribe(response => {
       console.log('response', response);
       this.labels = response.body;
       console.log('labels:', this.labels);
     });
   }
+  ngOnDestroy(): void {
+    this.todo.unsubscribe();
+  }
+
   // -------------------------------------------------------------------
 
   createLabel(): void {
