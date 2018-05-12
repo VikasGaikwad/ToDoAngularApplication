@@ -11,36 +11,10 @@ import { ArchiveComponent } from './component/archive/archive.component';
 import { RemindersComponent } from './component/reminders/reminders.component';
 import {AuthGuard} from './auth/AuthGuard';
 import { LabelNavComponent } from './component/label-nav/label-nav.component';
+// import { CommonCodeComponent } from './component/common-code/common-code.component';
 
 
-
-// redirectTo will redirect the first page to login page by default
-// path :'login' will redirect to LoginComponent in login.component.ts file.
-// path : 'register' will redirect to RegisterComponent to register.component.ts file.
-// const routes: Routes = [
-//   {path : '' , redirectTo : 'login', pathMatch : 'full'},
-// {path : 'login' , component : LoginComponent},
-// {path : 'register', component : RegisterComponent},
-// {path : 'notes', component : NotesComponent},
-// {path : 'forgot', component : ForgotComponent},
-// { path : 'resetpassword', component : ResetpasswordComponent },
-// {path : 'home' , component : HomeComponent,
-
-// children: [
-//   { path: '', redirectTo: 'notes', pathMatch: 'full' },
-//   { path: 'notes', component: NotesComponent },
-//   {path: 'trash', component: TrashComponent},
-//   {path: 'archive', component: ArchiveComponent},
-//   {path: 'reminder', component: RemindersComponent}
-
-// ]
-// }
-
-// ];
-
-
-
-const routes: Routes = [
+ const routes: Routes = [
   {path : '' , redirectTo : 'login', pathMatch : 'full'},
  {path : 'register', component : RegisterComponent},
 // { path : 'resetpassword', component : ResetpasswordComponent },
@@ -57,7 +31,6 @@ const routes: Routes = [
       { path: 'label', component: LabelNavComponent}
   ]
   }
-
 ];
 
 @NgModule({
@@ -65,3 +38,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+// export const routingComponents = [NotesComponent, TrashComponent, ArchiveComponent, RemindersComponent,
+//   LabelNavComponent];

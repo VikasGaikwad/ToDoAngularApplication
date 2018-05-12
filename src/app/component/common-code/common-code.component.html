@@ -1,0 +1,146 @@
+<mat-card fxFlex="265px" [style.background]="note.color">
+  <div *ngIf="note.image">
+    <img [src]="note.imageString" width="235px" />
+    <mat-icon (click)="deleteImage(note)">close</mat-icon>
+  </div>
+  <div (click)="pinUnpin(note)" style="margin-left: 165px;">
+    <img [src]=image(note)>
+
+  </div>
+  
+  <mat-card-title (click)="openNoteDialog(note)">
+    <b style="word-wrap: break-word;">{{note.title}}</b>
+  </mat-card-title>
+  <mat-card-subtitle (click)="openNoteDialog(note)">{{note.description}}</mat-card-subtitle>
+
+
+
+  <!-- ---------reminder chip------------ -->
+
+  <div *ngIf="note.reminder!=null">
+    <div mat-menu-item>
+      <mat-chip-list>
+        <mat-chip selected="true" class="chip">
+          <label>{{note.reminder | date:'MMM dd,y, hh:mm a'}}</label>
+          <mat-icon (click)="updateNote(note, null, 'reminder')">close</mat-icon>
+
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+
+  <!-----------------label chip-------------------->
+
+  <div *ngIf="note.labels!=null">
+    <div *ngFor="let label of note.labels">
+      <div mat-menu-item>
+        <mat-chip-list>
+          <mat-chip selected="true">
+
+            <label>{{label.labelName}}</label>
+            <mat-icon (click)="updateNote(label, false,'close')">close</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------trashnote------------ -->
+
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item (click)="updateNote(note,'true', 'trash')">Delete note</button>
+      <div>
+        <button type="submit" mat-menu-item [matMenuTriggerFor]="label" (click)="readLabels()">
+          <span>change label</span>
+        </button>
+      </div>
+      <mat-menu #label="matMenu">
+
+        <div fxLayout="column" fxLayoutGap="20px">
+          <div>
+            <b>label note</b>
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Search name">
+            </mat-form-field>
+          </div>
+          <div *ngIf="labels!=null">
+            <div *ngFor="let label of labels">
+              <label>
+                <input type="checkbox" name="labels" value="{{label.labelName}}" [(ngModel)]="label.checked" (ngModelChange)="addLabelOnNote(label.labelId, note.noteId,$event)"
+                /> {{label.labelName}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </mat-menu>
+    </mat-menu>
+    <mat-menu #touch="matMenu">
+      <button mat-menu-item (click)="reminder(note,'Today')">Later Today 8PM</button>
+      <button mat-menu-item (click)="reminder(note,'Tomorrow')">Tomorrow</button>
+      <button mat-menu-item (click)="reminder(note,'NextWeek')">Next Week</button>
+    </mat-menu>
+
+
+    <div class="form-group">
+      <button mat-icon-button>
+        <mat-icon for="file">photo</mat-icon>
+
+        <input type="file" id="file" (change)="handleFileInput($event.target.files,note.noteId)">
+
+      </button>
+    </div>
+
+
+
+
+    <!-- collaborator -->
+
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <button mat-icon-button (click)="collaboratorDialogBox(note)">
+        <mat-icon>group_add</mat-icon>
+      </button>
+    </div>
+
+
+
+    <!-- color open -->
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="color" class="images">
+        <mat-icon>color_lens</mat-icon>
+      </button>
+      <mat-menu #color="matMenu">
+
+        <div>
+          <a *ngFor="let color of colors">
+            <img src="{{color.path}}" (click)="note.color=color.color;trashnote(note,note.status)">
+          </a>
+        </div>
+      </mat-menu>
+    </div>
+
+
+
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <button mat-icon-button [matMenuTriggerFor]="touch">
+        <mat-icon>touch_app</mat-icon>
+      </button>
+    </div>
+
+    <div>
+      <button mat-icon-button (click)="updateNote(note,'true', 'archive')">
+        <mat-icon>archive</mat-icon>
+      </button>
+    </div>
+
+
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+
+  </div>
+</mat-card>

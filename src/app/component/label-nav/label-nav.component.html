@@ -7,17 +7,35 @@
 
     <div>
       <img style="margin-right: 10px;height: 17px;margin-top: 10px;">
-      <input style="outline: none;border:none;" contenteditable="true" matInput placeholder="Create new label" [(ngModel)]="model.labelName">
+      <input style="outline: none;border:none;" contenteditable="true" matInput placeholder=" Create new label" [(ngModel)]="model.labelName">
       <img style="margin-right: 10px;height: 17px;margin-top: 10px;" matTooltip="create label" src="{{checkImg}}" (click)=" createLabel(label)">
     </div>
-    <ul>
-      <li *ngFor="let label of labels">
-        {{label.labelName}}
-      </li>
-    </ul>
   </div>
+
+ <div fxLayout="row" *ngFor="let label of labels">
+    
+    <div><mat-icon>label</mat-icon></div>
+    <div>
+      <input #inlineEditControl [(ngModel)]="label.labelName">
+    </div>
+      <!-- <div title="Click to edit" (click)="edit(value)" (focus)="edit(value);" tabindex="0" class="inline-edit">{{value}}&nbsp;</div> -->
+
+    <div>
+      
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item (click)="deleteLabel(label.labelId)">Delete label</button>
+        <button mat-menu-item (click)="updateLabel(label)">Update label</button>
+
+      </mat-menu>
+   </div>   
+ </div>
+
+
   <div flexLayout="row" fxLayoutAlign="end">
     <button type="submit" (click)="createLabel()" mat-raised-button style="margin-top: 160px;">Done</button>
   </div>
 </div>
-

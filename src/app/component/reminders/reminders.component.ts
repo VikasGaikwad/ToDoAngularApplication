@@ -21,9 +21,7 @@ export class RemindersComponent implements OnInit, OnDestroy {
         this.notes = response.body;
       });
     }
-    ngOnDestroy(): void {
-this.todo.unsubscribe();
-    }
+
     reminder(note, day): void {
       if (day === 'Today') {
             this.today = new Date();
@@ -56,4 +54,7 @@ this.todo.unsubscribe();
 
 
     }
+    ngOnDestroy(): void {
+      this.todo.unsubscribe();
+          }
   }

@@ -5,8 +5,9 @@
 // modules in app.module.ts
 
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import {MatInputModule} from '@angular/material';
+import { CommonModule } from '@angular/common';
+import { AppRoutingModule} from './app-routing.module';
+import { MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,7 +15,7 @@ import {FormControl, Validators} from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpService} from '../app/http.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -24,7 +25,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {CanActivate} from '@angular/router';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-
 // import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 // AppComponent is import for loaing components in @NgModel from app.component.ts
 // LoginComponent is import for loaing components in @NgModel from login/login.component.ts
@@ -51,9 +51,8 @@ import { UserService } from './service/user.service';
 import { CollaboratorService } from './service/collaborator.service';
 import { UpdatenoteComponent } from './component/updatenote/updatenote.component';
 import { ColorToolDirective } from './color-tool.directive';
+ import { CommonCodeComponent } from './component/common-code/common-code.component';
 // import { HomeNewComponent } from './home-new/home-new.component';
-
-
 // MatFormFieldModule container is imported to designinfg forms in login and registration page
 // used to set styles such as the underline, floating label, and hint messages.
 
@@ -73,11 +72,11 @@ import { ColorToolDirective } from './color-tool.directive';
     LabelNavComponent,
     CollaboratorComponent,
     UpdatenoteComponent,
-    ColorToolDirective
-
-
+    ColorToolDirective,
+    CommonCodeComponent
   ],
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatFormFieldModule,
@@ -96,9 +95,6 @@ import { ColorToolDirective } from './color-tool.directive';
     MatChipsModule,
     MatDialogModule,
     ShowHidePasswordModule.forRoot()
-
-    // HttpClient
-
     // MatDialogRef
 
 

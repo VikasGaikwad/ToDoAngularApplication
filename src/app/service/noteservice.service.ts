@@ -9,49 +9,39 @@ export class NoteserviceService {
 
 
 
-  updateNote(note, status?, field?) {
+  updateNote(note, status?, field?): any {
 
     if (field === 'pin') {
       note.pin = status;
-    console.log('trashnote', note);
-      this.httpservice.putService('updatenote', note).subscribe(response => {
-        this.response = response;
-        console.log(response);
-      });
+      console.log('trashnote', note);
+     return this.httpservice.putService('updatenote', note);
 
     } else if (field === 'trash') {
       note.trash = status;
       console.log('trashnote', note);
-      this.httpservice.putService('updatenote', note).subscribe(response => {
-        this.response = response;
-        console.log(response);
-      });
+     return this.httpservice.putService('updatenote', note);
 
 
 
-  } else if (field === 'archive') {
-    note.archive = status;
+    } else if (field === 'archive') {
+      note.archive = status;
+      this.httpservice.putService('updatenote', note);
+
+    } else if (field === 'close') {
+      this.httpservice.putService('updatenote', note);
+    } else if (field === 'reminder') {
+      this.httpservice.putService('updatenote', note);
+    }
+    this.httpservice.putService('updatenote', note);
+  }
+
+
+
+  deleteImage(note) {
     this.httpservice.putService('updatenote', note).subscribe(response => {
       this.response = response;
-      console.log(response);
+      console.log(response.body);
     });
-
-  } else if (field === 'close') {
-    this.httpservice.putService('updatenote', note).subscribe( response => {
-      this.response = response;
-      console.log(response);
-    });
-  }
-  this.httpservice.putService('updatenote', note).subscribe( response => {
-    this.response = response;
-    console.log(response);
-  });
-  }
-  deleteImage(note) {
-this.httpservice.putService('updatenote', note).subscribe( response => {
-  this.response = response;
-  console.log(response.body);
-});
 
   }
 }

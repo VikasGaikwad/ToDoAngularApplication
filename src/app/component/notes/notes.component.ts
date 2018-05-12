@@ -11,6 +11,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteserviceService } from '../../service/noteservice.service';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
+// import { CommonCodeComponent} from '../common-code/common-code.component';
 import { Subscription } from 'rxjs/Subscription';
 
 // -------------------------------------------------------------------
@@ -23,6 +24,7 @@ import { Subscription } from 'rxjs/Subscription';
 // -------------------------------------------------------------------
 
 export class NotesComponent implements OnInit, OnDestroy {
+//  @Input() commoncomponent: CommonCodeComponent;
   labels: LabelResponse[];
   object: ImageResponse;
   model: any = {};
@@ -32,7 +34,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   notes: NoteResponse[];
   fileToUpload: File = null;
   // -------------------------------------------------------------------
-
+  unPin = '/assets/icons/unPin.svg';
   pinSVG = '/assets/pin.svg';
   color_blue = '/assets/icon/blue.png';
   color_brown = '/assets/icon/brown.png';
@@ -71,18 +73,22 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   // -------------------------------------------------------------------
 
-  constructor(private http: HttpService, public dialog: MatDialog, private noteService: NoteserviceService,
-    private labelObj: LabelService, private uploadService: UploadService) { }
+  constructor(
+    private http: HttpService, public dialog: MatDialog,
+    private noteService: NoteserviceService,
+    private labelObj: LabelService,
+    private uploadService: UploadService) { }
 
 
   todo: Subscription;
 
 
   ngOnInit() {
-    this.todo = this.http.getService('readallnotes').subscribe(response => {
-      this.notes = response.body;
-      this.notes.forEach(note => {
-        note.imageString = 'data:image/jpg;base64,' + note.image;
+    this.todo = this.http.getService('readallnotes')
+                .subscribe(response => {
+                this.notes = response.body;
+                this.notes.forEach(note => {
+                note.imageString = 'data:image/jpg;base64,' + note.image;
       });
 
       console.log(this.notes);
@@ -209,6 +215,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   // -------------------------------------------------------------------
 
 
+
   handleFileInput(file: File, noteId) {
     console.log('file', file);
     this.uploadService.handleFileInput(file, noteId);
@@ -228,5 +235,26 @@ export class NotesComponent implements OnInit, OnDestroy {
     });
   }
 
-}
+
+
+//   isPinnedOrNot(note, status, pin) {
+
+//     if (status === true) {
+//      // this.unPinNote(note, true, pin);
+// this.commonCodeobj.updateNote(note, status, pin);
+//     } else {
+//       this.pinNote(note, false, pin);
+//     }
+//     }
+
+
+//     pinNote(note, status, field) {
+//       this.noteService.updateNote(note, status, field);
+
+//     }
+//     unPinNote(note, status, field) {
+//       this.noteService.updateNote(note, status, field);
+
+//     }
+ }
 // -------------------------------------------------------------------

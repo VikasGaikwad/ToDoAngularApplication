@@ -1,7 +1,7 @@
 
 import { Directive, ElementRef, Input, AfterViewInit, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
-import 'rxjs/add/operator/pairwise';
+import { filter, map } from 'rxjs/operators';
 
 @Directive({
 selector: '[appColorTool]'
@@ -15,12 +15,11 @@ private elRef: ElementRef) { }
 ngOnInit(): void {
 console.log('from color directive check->>', this.router.url);
 
-this.router.events.subscribe((event: any) => {
-if (event instanceof NavigationEnd) {
-console.log(event);
-this.changeColor(event.url);
-}
-
+this.router.events.pipe(
+    filter(event => event instanceof NavigationEnd)
+).subscribe(({url}: any) => {
+    console.log(url);
+    this.changeColor(url);
 });
 
 }
@@ -28,7 +27,7 @@ changeColor(url: string) {
 
 
 if (url.indexOf('notes') > -1) {
-this.elRef.nativeElement.style['background-color'] = 'skyblue';
+this.elRef.nativeElement.style['background-color'] = 'yellow';
 } else if (url.indexOf('archive') > -1) {
 this.elRef.nativeElement.style['background-color'] = 'MediumSlateBlue ';
 } else if (url.indexOf('reminder') > -1) {
@@ -39,3 +38,4 @@ this.elRef.nativeElement.style['background-color'] = 'RosyBrown';
 }
 
 }
+

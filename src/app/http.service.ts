@@ -9,12 +9,12 @@ import { ImageResponse } from './imageResponse';
 import { environment} from '../environments/environment';
 //  The @Injectable() decorator tells Angular that this service
 //  might itself have injected dependencies.
-
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
 export class HttpService {
-
+  private allLabelSubject = new Subject<any>();
   urlPath: string;
   httpOptions = {
     headers : new HttpHeaders({
@@ -50,12 +50,24 @@ export class HttpService {
   }
   // -------------------------------------------------------------------
 
-  postserviceLabel(createLabel, obj): Observable<any> {
-    this.urlPath = environment.noteUrl.concat('addlabel');
-    return this.http.post<any>(this.urlPath, obj, this.httpOptions);
-  }
+  // postserviceLabel(createLabel, obj): Observable<any> {
+  //   this.urlPath = environment.noteUrl.concat('addlabel');
+  //   return this.http.post<any>(this.urlPath, obj, this.httpOptions);
+  // }
 
   // -------------------------------------------------------------------
+  loadAll(path): void {
+    this.urlPath = environment.noteUrl.concat(path);
+    this.appendToken();
+    this.http.get<any>(this.urlPath, this.httpOptions).toPromise().then((res) => {
+    this.allLabelSubject.next(res);
+    });
+  }
+
+  getAll(path): any {
+    this.loadAll(path);
+    return this.allLabelSubject.asObservable();
+  }
 
   getService(path): Observable<any> {
     this.urlPath = environment.noteUrl.concat(path);

@@ -1,5 +1,9 @@
 
 <div>
+    <div *ngIf="data.image">
+        <img [src]="data.imageString" width="235px" />
+        <mat-icon (click)="deleteImage(note)">close</mat-icon>
+      </div>
 <div #title id="update-title" contenteditable="true" data-text="title" name="title" (input)="data.title=$event.target.innerHTML"></div>
 <div #description id="update-description" contenteditable="true" data-text="description" name="description" (input)="data.description=$event.target.innerHTML"></div>
 

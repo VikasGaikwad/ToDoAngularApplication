@@ -3,6 +3,7 @@ import { HttpService } from '../../http.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { LabelResponse } from '../../labelResponse';
 import { Subscription } from 'rxjs/Subscription';
+import { LabelService } from '../../service/label.service';
 
 @Component({
   selector: 'app-label-nav',
@@ -14,11 +15,12 @@ import { Subscription } from 'rxjs/Subscription';
 
 
 export class LabelNavComponent implements OnInit, OnDestroy {
+
   model: any = {};
   @Input() labels: LabelResponse[];
   // -------------------------------------------------------------------
 
-  constructor(private http: HttpService, public MatRef: MatDialogRef<LabelNavComponent>) { }
+  constructor(private http: HttpService, public MatRef: MatDialogRef<LabelNavComponent>, private labelObj: LabelService) { }
   todo: Subscription;
   // -------------------------------------------------------------------
 
@@ -29,20 +31,37 @@ export class LabelNavComponent implements OnInit, OnDestroy {
       console.log('labels:', this.labels);
     });
   }
-  ngOnDestroy(): void {
-    this.todo.unsubscribe();
-  }
+
 
   // -------------------------------------------------------------------
 
+
   createLabel(): void {
 
-    this.http.postserviceLabel('createLabel', this.model)
+    this.todo =  this.labelObj.createLabel(this.model)
       .subscribe(response => {
         console.log('Label Created', response);
 
         this.MatRef.close();
       });
+  }
+  deleteLabel(labelId): void {
+    this.model = labelId;
+    console.log(labelId);
+
+ this.labelObj.deleteLabel(labelId).subscribe(response => {
+ console.log('label id----', labelId);
+  });
+}
+
+updateLabel(label): void {
+this.labelObj.updateLabel(label).subscribe(response => {
+console.log();
+});
+ }
+
+  ngOnDestroy(): void {
+    this.todo.unsubscribe();
   }
 }
 

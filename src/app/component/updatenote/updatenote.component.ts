@@ -3,6 +3,7 @@ import { ViewChild, ElementRef, Component, OnInit, Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
  import { HttpService } from '../../http.service';
  import { NoteResponse } from '../../noteResponse';
+ import { NoteserviceService } from '../../service/noteservice.service';
 
 @Component({
   selector: 'app-updatenote',
@@ -19,7 +20,7 @@ notes: NoteResponse[];
 
 
 constructor(@Inject(MAT_DIALOG_DATA) private data: NoteResponse,
-private commonService: HttpService,
+private commonService: HttpService, private noteService: NoteserviceService,
 public dialogRef: MatDialogRef<UpdatenoteComponent>) { }
 
 ngOnInit() {
@@ -42,5 +43,12 @@ console.log(data);
 // this.refreshNote();
 this.dialogRef.close();
 }) ;
+}
+deleteImage(note): void {
+  // this.noteService.deleteImage(noteId) {
+  note.image = null;
+  this.noteService.deleteImage(note);
+  console.log('deleting image from noteId - ', note);
+
 }
 }
