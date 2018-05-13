@@ -1,11 +1,12 @@
-<body>
+
 
   <!-- When we press this submit button this triggers the normal HTML5 form submission mechanism,
     so it tries to POST the form to the current URL.
 
     However instead of issuing a standard POST we want to call a function on our component instead, 
     to do that we use the ngSubmit directive and add it to the form element -->
-  <form (ngSubmit)="login()">
+    <!-- <body>
+    <form (ngSubmit)="login()">
     <h2>Login Form</h2>
     <div class="loginContainer">
       <mat-form-field>
@@ -34,4 +35,49 @@
     </div>
 
   </form>
-</body>
+</body> -->
+
+<div class="example-container" fxLayoutAlign="center center" class="loginMain-div">
+  <mat-card class="example-card">
+  
+  <form class="example-container" #loginFrom="ngForm" (ngSubmit)="login()">
+  <div>
+  <h1 align="center">login</h1>
+  </div>
+  <!-- USERNAME-->
+  
+  
+  <div fxLayout="row">
+  
+  <mat-form-field fxFlex fxFlex.gt-xs="400px">
+  <input matInput placeholder="Email" name="email" [formControl]="emailControl" [errorStateMatcher]="match" [(ngModel)]="model.email"> <mat-error *ngIf="emailControl.hasError('required')">Email Address is required</mat-error>
+  <mat-error *ngIf="emailControl.hasError('pattern') && !emailControl.hasError('required') ">Enter Valid Email</mat-error>
+  </mat-form-field>
+  </div>
+  
+  
+  <!-- PASSWORD-->
+  <div class="example-container" fxLayout="row" fxLayoutAlign="center">
+  <mat-form-field fxFlex fxFlex.gt-xs="400px">
+  <input matInput type="password" placeholder="Enter password" [formControl]="passwordControl"
+  [errorStateMatcher]="match" name="password" [(ngModel)]="model.password" required>
+  <mat-error *ngIf="passwordControl.hasError('password') && !passwordControl.hasError('required')">Please enter a valid password address
+  </mat-error>
+  <mat-error *ngIf="passwordControl.hasError('required')">password is <strong>required</strong> </mat-error>
+  <mat-error *ngIf="passwordControl.hasError('pattern') && !passwordControl.hasError('required') ">Password not valid</mat-error>
+  </mat-form-field>
+  </div>
+  
+  <div class="example-container" fxLayout="row" fxLayoutAlign="center">
+  <button mat-raised-button color="primary" type="submit" class="save_button" [disabled]="!emailControl.valid || !passwordControl.valid">login</button>
+  </div>
+  
+  </form>
+ <div>
+  <a mat-button routerLink="/register"> Register</a>
+  <a mat-button routerLink="/forgotPassword">Forgot Password</a>
+  </div>
+  </mat-card>
+  
+  </div>
+  

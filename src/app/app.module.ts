@@ -25,6 +25,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {CanActivate} from '@angular/router';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import {FormGroup} from '@angular/forms';
+
 // import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 // AppComponent is import for loaing components in @NgModel from app.component.ts
 // LoginComponent is import for loaing components in @NgModel from login/login.component.ts
@@ -52,6 +54,8 @@ import { CollaboratorService } from './service/collaborator.service';
 import { UpdatenoteComponent } from './component/updatenote/updatenote.component';
 import { ColorToolDirective } from './color-tool.directive';
  import { CommonCodeComponent } from './component/common-code/common-code.component';
+import { SearchFilterPipe } from './search-filter.pipe';
+import { AlwaysLogginAuthGuard} from './auth/AuthGuard';
 // import { HomeNewComponent } from './home-new/home-new.component';
 // MatFormFieldModule container is imported to designinfg forms in login and registration page
 // used to set styles such as the underline, floating label, and hint messages.
@@ -73,7 +77,8 @@ import { ColorToolDirective } from './color-tool.directive';
     CollaboratorComponent,
     UpdatenoteComponent,
     ColorToolDirective,
-    CommonCodeComponent
+    CommonCodeComponent,
+    SearchFilterPipe
   ],
   imports: [
     CommonModule,
@@ -94,7 +99,7 @@ import { ColorToolDirective } from './color-tool.directive';
     MatMenuModule,
     MatChipsModule,
     MatDialogModule,
-    ShowHidePasswordModule.forRoot()
+    ShowHidePasswordModule.forRoot(),
     // MatDialogRef
 
 
@@ -102,7 +107,8 @@ import { ColorToolDirective } from './color-tool.directive';
   // bootstrap:[AppComponent] is used to run AppComponent.
   // entry component used to display dialog box.
   entryComponents: [LabelNavComponent, CollaboratorComponent, UpdatenoteComponent],
-  providers: [HttpService, AuthGuard, LabelService, UploadService, NoteserviceService, UserService, CollaboratorService],
+  providers: [
+    HttpService, AuthGuard, LabelService, UploadService, NoteserviceService, UserService, CollaboratorService],
   bootstrap: [AppComponent]
 })
 

@@ -9,28 +9,30 @@ import { HomeComponent } from './component/home/home.component';
 import {TrashComponent} from './component/trash/trash.component';
 import { ArchiveComponent } from './component/archive/archive.component';
 import { RemindersComponent } from './component/reminders/reminders.component';
-import {AuthGuard} from './auth/AuthGuard';
+import {AuthGuard, AlwaysLogginAuthGuard} from './auth/AuthGuard';
 import { LabelNavComponent } from './component/label-nav/label-nav.component';
+import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl} from '@angular/forms';
 // import { CommonCodeComponent } from './component/common-code/common-code.component';
 
 
  const routes: Routes = [
-  {path : '' , redirectTo : 'login', pathMatch : 'full'},
- {path : 'register', component : RegisterComponent},
-// { path : 'resetpassword', component : ResetpasswordComponent },
- {path : 'forgot', component : ForgotComponent},
-  { path : 'login' , component : LoginComponent},
-  { path : 'home' , component : HomeComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: '', redirectTo: 'notes', pathMatch: 'full' },
-      { path: 'notes', component: NotesComponent },
-      { path: 'trash', component: TrashComponent},
-      { path: 'archive', component: ArchiveComponent},
-      { path: 'reminder', component: RemindersComponent},
-      { path: 'label', component: LabelNavComponent}
-  ]
-  }
+         {path : '' , redirectTo : 'login', pathMatch : 'full'},
+         {path : 'register', component : RegisterComponent},
+         { path : 'login' , component : LoginComponent},
+         { path : 'home' , component : HomeComponent,
+         canActivate: [AuthGuard],
+            children: [
+                        { path: '', redirectTo: 'notes', pathMatch: 'full' },
+                        { path: 'notes', component: NotesComponent },
+                        { path: 'trash', component: TrashComponent},
+                        { path: 'archive', component: ArchiveComponent},
+                        { path: 'reminder', component: RemindersComponent},
+                        { path: 'label', component: LabelNavComponent}
+                  ]
+      },
+      { path: 'forgotPassword', component: ForgotComponent },
+      { path: 'resetpassword', component: ResetpasswordComponent }
+
 ];
 
 @NgModule({

@@ -6,6 +6,7 @@ import { NoteResponse } from '../../noteResponse';
 import { UserResponse} from '../../userResponse';
 import {CollaboratorService} from '../../service/collaborator.service';
 import { Subscription } from 'rxjs/Subscription';
+import { NoteserviceService } from '../../service/noteservice.service';
 
 @Component({
   selector: 'app-collaborator',
@@ -20,7 +21,8 @@ export class CollaboratorComponent implements OnInit {
   @Input() notes: NoteResponse[];
 collaborators: CollaboratorResponse [];
 
-  constructor(private http: HttpService, public MatRef: MatDialogRef<CollaboratorComponent>,
+  constructor(private http: HttpService, private noteService: NoteserviceService,
+     public MatRef: MatDialogRef<CollaboratorComponent>,
     private collaboratorService: CollaboratorService , @Inject(MAT_DIALOG_DATA) public data: NoteResponse) { }
     todo: Subscription;
 
@@ -32,7 +34,10 @@ collaborators: CollaboratorResponse [];
       console.log(this.collaborators);
       });
 
-
+      this.noteService.getAllNotes().subscribe(res => {
+        this.notes = res;
+        console.log('notes in side collaborator', this.notes);
+        });
 
   }
 

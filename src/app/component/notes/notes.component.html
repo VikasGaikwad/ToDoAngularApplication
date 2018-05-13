@@ -4,6 +4,7 @@
       <div>Take a Note ... </div>
     </mat-card>
   </div>
+
   <div fxLayout="row" fxLayoutAlign="center center" style="margin-top:50px" *ngIf="show">
     <mat-card>
       <div style="width: 400px; height: 100px;">
@@ -22,35 +23,25 @@
     </mat-card>
   </div>
  
-     p....................................................in.
+    <div>Pinned</div>
    <div class="class-container" fxLayoutAlign="center center">
       <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
-        <div *ngFor="let note of notes" class={{statusClass}}>
+        <div *ngFor="let note of notes|searchFilter:searchText" class={{statusClass}}>
             <div *ngIf="note.trash===false && note.archive===false && note.pin===true">
                 <app-common-code [note]="note"></app-common-code>
           </div>
         </div>
       </div>
     </div>
-    unp....................................................in.
-
-
+   
+    <div>Other</div>
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
-        <div *ngFor="let note of notes">
+        <div *ngFor="let note of notes|searchFilter:searchText">
           <div *ngIf="note.trash===false && note.archive===false && note.pin===false">
              <div (click)="isPinnedOrNot(note, 'true', 'pin')"></div> 
             <app-common-code [note]="note"></app-common-code>
           </div>
         </div>
       </div>
-    
-  
 
-
-
-
-
-
-
-
-</div>
+    </div>

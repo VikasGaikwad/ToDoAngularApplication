@@ -1,3 +1,5 @@
+import { CollaboratorResponse } from './collaboratorResponse';
+
 export class NoteResponse {
 noteId: number;
 title: string;
@@ -11,7 +13,8 @@ checked: boolean;
 labels: Array<LabelObject>;
 image: any[];
 imageString: string;
- collaborators: Array<CollaboratorObject>;
+ collaborators: CollaboratorResponse[];
+ collaboratorName: string;
 }
 export class LabelObject {
     labelId: number;
@@ -19,6 +22,6 @@ export class LabelObject {
 }
 export class CollaboratorObject {
     cId: number;
-    sharedId: String;
+    sharedId: string;
     noteId: number;
 }

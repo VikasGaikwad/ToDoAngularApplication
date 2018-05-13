@@ -13,6 +13,7 @@ import { CollaboratorComponent } from '../collaborator/collaborator.component';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 // import { CommonCodeComponent} from '../common-code/common-code.component';
 import { Subscription } from 'rxjs/Subscription';
+import {FormsModule, FormGroup, FormControl, FormBuilder} from '@angular/forms';
 
 // -------------------------------------------------------------------
 
@@ -33,6 +34,11 @@ export class NotesComponent implements OnInit, OnDestroy {
   response: any = {};
   notes: NoteResponse[];
   fileToUpload: File = null;
+
+  // search
+noteForm: FormGroup;
+inputFormControl: FormControl;
+searchText: string;
   // -------------------------------------------------------------------
   unPin = '/assets/icons/unPin.svg';
   pinSVG = '/assets/pin.svg';
@@ -77,7 +83,13 @@ export class NotesComponent implements OnInit, OnDestroy {
     private http: HttpService, public dialog: MatDialog,
     private noteService: NoteserviceService,
     private labelObj: LabelService,
-    private uploadService: UploadService) { }
+    private uploadService: UploadService) {
+      http.searchObservable$.subscribe(
+           formData => {
+         this.searchText = formData;
+         console.log('in note component, ', formData);
+          });
+    }
 
 
   todo: Subscription;
@@ -97,6 +109,17 @@ export class NotesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.todo.unsubscribe();
 
+  }
+  getAllNotes(): void {
+    this.todo = this.noteService.getAllNotes()
+    .subscribe(response => {
+    this.notes = response.body;
+    this.notes.forEach(note => {
+    note.imageString = 'data:image/jpg;base64,' + note.image;
+});
+
+console.log(this.notes);
+});
   }
 
   updateNote(note, status, field) {

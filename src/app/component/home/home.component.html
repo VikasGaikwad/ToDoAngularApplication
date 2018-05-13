@@ -1,5 +1,5 @@
 
-
+<div>
     <mat-toolbar style="background-color:rgb(255, 217, 0)" appColorTool>
             <div fxLayout="row">               
                 <div> 
@@ -9,8 +9,18 @@
                 <div>
                     fundooNotes
                 </div>
-       
-                <div style="margin-left: 550%;">
+       <!--sesrch-->
+      <div>
+    <form [formGroup]="homeForm">
+    <mat-icon>search</mat-icon>
+    <input type='text' style="height: 46px;width:350%;" placeholder="Search ..." [formControl]="inputFormControl"> 
+    </form> 
+    </div>
+
+
+
+    
+                <div style="margin-left: 258%;">
                     <button mat-mini-fab [matMenuTriggerFor]="appMenu">User</button>
                 </div>
             </div>
@@ -93,4 +103,4 @@
         <!-- The <router-outlet> tells the router where to display routed views. -->
         <router-outlet> </router-outlet>
     </mat-sidenav-container>
-
+</div>

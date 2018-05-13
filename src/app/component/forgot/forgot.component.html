@@ -1,4 +1,4 @@
-<h2>Forgot Password ???</h2>
+<!-- <h2>Forgot Password ???</h2>
 <body>
   <div class="forgotContainer">
     <mat-form-field>
@@ -7,4 +7,20 @@
     </mat-form-field>
   </div>
   
-</body>
+</body> -->
+<div style="margin-left: 12px;">
+<form class="example-container" #forgotFrom="ngForm" (ngSubmit)="forgot()">
+<h2>Reset your password</h2>
+<div class="forgotcontainer">
+<label for="email_field">
+Enter your email address and we will send you a link to reset your password.
+</label>
+<mat-form-field>
+<input matInput placeholder="Email_Id" name="email" [(ngModel)]="model.email">
+</mat-form-field>
+</div> 
+<div class="forgotcontainer">
+<button mat-raised-button color ="primary" type="submit">Submit</button> 
+</div>
+</form>
+</div>

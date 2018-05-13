@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http.service';
+import { NoteResponse } from '../noteResponse';
+import { Observable } from 'rxjs/Observable';
+
 
 @Injectable()
 export class NoteserviceService {
   today: Date;
+path: string;
   response: any = {};
   constructor(private httpservice: HttpService) { }
 
 
 
+getAllNotes(): Observable<NoteResponse[]> {
+     const path = 'getNotes';
+    return this.httpservice.getService(path);
+  }
   updateNote(note, status?, field?): any {
 
     if (field === 'pin') {
