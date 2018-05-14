@@ -4,11 +4,11 @@ import { HttpService } from './../http.service';
 @Injectable()
 export class UserService {
 
-  constructor(private httpser: HttpService) { }
+  constructor(private http: HttpService) { }
 
   registerUser(model) {
 
-    this.httpser.postService('register', model);
+    this.http.postService('register', model);
 
 
   }

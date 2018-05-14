@@ -9,14 +9,15 @@ import { HttpService } from '../../http.service';
 })
 export class ForgotComponent implements OnInit {
   model: any = {};
-  constructor(private httpser: HttpService) { }
+  constructor(private http: HttpService) { }
   forgot(): void {
     console.log('forgot', this.model);
-    this.httpser.postService('forgotpassword', this.model).subscribe(response => {
+    this.http.postService('forgotpassword', this.model).subscribe(response => {
       if (response.status.body === 200) {
         console.log('password reset success..');
         window.alert('password reseted successfully');
         } else if (response.status !== 200) {
+          window.alert('password not reseted successfully');
         }
         });
         }

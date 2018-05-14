@@ -104,13 +104,7 @@ searchObservable$ = this.searchSubjcet.asObservable();
   }
   // -------------------------------------------------------------------
 
-  // postService(createnote, obj): Observable<any> {
-  //   this.urlPath = this.noteUrl.concat(createnote);
-  //   this.appendToken();
-  //   return this.http.post<any>(this.urlPath, obj, this.httpOptions);
-  // }
   postService(path, obj): Observable<any> {
-    // this.urlPath = environment.noteUrl.concat(path);
     this.urlPath = environment.noteUrl.concat(path);
   //  this.appendToken();
     return this.http.post<any>(this.urlPath, obj, this.httpOptions );

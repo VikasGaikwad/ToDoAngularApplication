@@ -10,7 +10,7 @@ export class RegisterComponent implements OnInit {
 
   // it will take any type of data
   model: any = {};
-  constructor(private httpser: HttpService, private userservice: UserService) { }
+  constructor(private http: HttpService, private userservice: UserService) { }
   register(): void {
     console.log('register', this.model);
     this.userservice.registerUser(this.model);

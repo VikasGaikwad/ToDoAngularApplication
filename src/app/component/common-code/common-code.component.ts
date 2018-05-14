@@ -30,7 +30,6 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
   response: any = {};
   notes: NoteResponse[];
   fileToUpload: File = null;
-
  // -------------------------------------------------------------------
  unPin = '/assets/icons/unPin.svg';
  pinSVG = '/assets/pin.svg';
@@ -76,7 +75,9 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
   public dialog: MatDialog,
   private noteService: NoteserviceService,
   private labelObj: LabelService,
-  private uploadService: UploadService) { }
+  private uploadService: UploadService) {
+
+  }
 
 
  todo: Subscription;
@@ -178,9 +179,9 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
 
  // -------------------------------------------------------------------
  refreshNote(path) {
-   this.http.getService('readallnotes').subscribe(response => {
-     this.notes = response.body;
-   });
+  //  this.http.getService('readallnotes').subscribe(response => {
+  //    this.notes = response.body;
+  //  });
  }
 
 

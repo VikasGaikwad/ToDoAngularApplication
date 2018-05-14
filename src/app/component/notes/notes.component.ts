@@ -94,7 +94,6 @@ searchText: string;
 
   todo: Subscription;
 
-
   ngOnInit() {
     this.todo = this.http.getService('readallnotes')
                 .subscribe(response => {
@@ -106,6 +105,7 @@ searchText: string;
       console.log(this.notes);
     });
   }
+
   ngOnDestroy(): void {
     this.todo.unsubscribe();
 
@@ -113,7 +113,8 @@ searchText: string;
   getAllNotes(): void {
     this.todo = this.noteService.getAllNotes()
     .subscribe(response => {
-    this.notes = response.body;
+    this.notes = response;
+    // this.notes = response.body;
     this.notes.forEach(note => {
     note.imageString = 'data:image/jpg;base64,' + note.image;
 });
@@ -125,6 +126,7 @@ console.log(this.notes);
   updateNote(note, status, field) {
 
     this.noteService.updateNote(note, status, field);
+
   }
   // -------------------------------------------------------------------
 
@@ -184,6 +186,7 @@ console.log(this.notes);
       data: note
     });
   }
+
 
   // -------------------------------------------------------------------
 
@@ -257,7 +260,6 @@ console.log(this.notes);
       width: '500px'
     });
   }
-
 
 
 //   isPinnedOrNot(note, status, pin) {

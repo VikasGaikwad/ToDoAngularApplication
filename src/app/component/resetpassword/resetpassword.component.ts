@@ -31,9 +31,11 @@ export class ResetpasswordComponent implements OnInit {
     this.httpser.postService(check, this.model).subscribe( response => {
     if (response.body.statusCode === 100)     {
     console.log('your password reset successfully');
+    alert('your password reset successfully');
     this.router.navigate(['/login']);
     }   else {
     console.log('Invalid Password or email');
+    alert('your password reset successfully');
     }
     });
     }
