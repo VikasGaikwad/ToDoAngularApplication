@@ -2,7 +2,7 @@
     <div fxLayout="row wrap"  
           fxLayoutAlign="space-between center"  
           class="mat-div" fxFlex="900px"> 
-            <div *ngFor="let note of notes | searchFilter : searchText| labeledNoteFilter : id">
+            <div *ngFor="let note of notes | searchFilter : searchText| labelnote : id">
        <app-common-code [note]="note"></app-common-code>
      </div>
     </div> 

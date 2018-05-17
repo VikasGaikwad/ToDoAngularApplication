@@ -1,0 +1,25 @@
+.dialogbox{
+
+
+    transform: none;
+    opacity: 1;
+    height: 604px;
+    width: 500px;
+    /* max-width: 80vw;
+    pointer-events: auto;
+    width: 500px;
+    height: 393px;
+    position: static; */
+}
+.dialogbox_css{
+    transform: none;
+    width: 650px;
+    height: 650px;
+    opacity: 1;
+}
+.img-class{
+    width: 563px;
+    margin-left: -24px;
+    margin-top: -24px;
+    margin-bottom: -4px;
+}

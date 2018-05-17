@@ -2,7 +2,7 @@
             
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
         <div *ngFor="let note of notes">
-            <div *ngIf="note.trash===false && note.archive===true && note.pin===true">
+            <div *ngIf="note.trash===false && note.archive===true">
                 <mat-card fxFlex="230px">
 
                     <mat-card-title><b>{{note.title}}</b></mat-card-title>

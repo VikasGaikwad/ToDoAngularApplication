@@ -84,7 +84,8 @@
 
         <div *ngFor="let label of labels">
             <div>
-              <button mat-menu-item>
+            <button [routerLink]="['/home/labelnote/', label.labelId]" mat-menu-item>
+              <!-- <button mat-menu-item> -->
                 <mat-icon>label</mat-icon>
                 <span>{{label.labelName}}</span>
               </button>

@@ -12,6 +12,7 @@ import { RemindersComponent } from './component/reminders/reminders.component';
 import {AuthGuard, AlwaysLogginAuthGuard} from './auth/AuthGuard';
 import { LabelNavComponent } from './component/label-nav/label-nav.component';
 import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl} from '@angular/forms';
+import { LabelNoteComponent } from './component/label-note/label-note.component';
 // import { CommonCodeComponent } from './component/common-code/common-code.component';
 
 
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl} f
                         { path: 'trash', component: TrashComponent},
                         { path: 'archive', component: ArchiveComponent},
                         { path: 'reminder', component: RemindersComponent},
-                        { path: 'label', component: LabelNavComponent}
+                        { path: 'label', component: LabelNavComponent},
+                        { path: 'labelnote/:id', component: LabelNoteComponent}
                   ]
       },
       {path : 'register', component : RegisterComponent},

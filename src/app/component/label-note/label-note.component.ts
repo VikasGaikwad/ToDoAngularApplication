@@ -19,7 +19,7 @@ public id;
   ngOnInit() {
     this.noteService.getAllNotes().subscribe(data => {
       this.noteObj = data;
-      // this.noteObj = data.body;
+
 
     });
     this.router.params.subscribe(params => {

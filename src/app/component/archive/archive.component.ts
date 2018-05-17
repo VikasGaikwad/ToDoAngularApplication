@@ -28,7 +28,7 @@ getNotes() {
   trashnote(note, status): void {
     note.archive = status;
     console.log('trashnote', note);
-    this.noteService.trashNote( note)
+    this.noteService.trashNote(note)
                     .subscribe(response => {
                         this.response = response;
                         console.log(response);

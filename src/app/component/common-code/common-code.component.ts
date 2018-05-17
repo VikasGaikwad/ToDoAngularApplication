@@ -97,16 +97,16 @@ export class CommonCodeComponent implements OnInit {
      this.noteService.reloadNotes();
    });
  }
-//  trashnote(note, status): void {
-//   note.archive = status;
-//   console.log('trashnote', note);
-//   this.http.putService('updatenote', note)
-//   .subscribe(response => {
-//     this.response = response;
+ colorNote(note, status): void {
+  note.status = status;
+  console.log('trashnote', note);
+  this.http.putService('updatenote', note)
+  .subscribe(response => {
+    this.response = response;
 
-//     console.log(response);
-// });
-// }
+    console.log(response);
+});
+}
 
 
  reminder(note, day, field): void {
@@ -170,11 +170,11 @@ export class CommonCodeComponent implements OnInit {
  // -------------------------------------------------------------------
 
  readLabels() {
-   console.log('message---------');
+   console.log('label reading...');
    this.labelServiceObj.readLabel().subscribe(res => {
      this.labels = res.body;
      console.log('label data', this.labels);
-     this.refreshNote();
+     // this.refreshNote();
    });
  }
 
@@ -185,18 +185,6 @@ export class CommonCodeComponent implements OnInit {
   //    this.notes = response.body;
   //  });
  }
-
-
-//  createnote(): void {
-//    console.log('createnote', this.model);
-
-//    this.http.postService('createnote', this.model)
-//      .subscribe(response => {
-//        this.response = response;
-//        console.log(response);
-//        this.refreshNote();
-//      });
-//  }
 
 
  deleteImage(note): void {
@@ -232,8 +220,8 @@ export class CommonCodeComponent implements OnInit {
  openNoteDialog(note) {
    this.dialog.open(UpdatenoteComponent, {
      data: note,
-     height: '300px',
-     width: '500px'
+     height: '500px',
+     width: '570px'
    });
  }
 

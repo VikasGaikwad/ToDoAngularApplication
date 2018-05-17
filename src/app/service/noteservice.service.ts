@@ -30,7 +30,8 @@ path: string;
   }
 
 getAllNotes(): Observable<NoteResponse[]> {
-     const path = 'getNotes';
+    //  const path = 'getNotes';
+    const path = 'user/readallnotes';
     return this.httpservice.getService(path);
   }
   updateNote(note, status?, field?): Observable<any> {
@@ -38,16 +39,14 @@ getAllNotes(): Observable<NoteResponse[]> {
       if (field === 'trash') {
       note.trash = status;
       console.log('trashnote', note);
-   //  return this.httpservice.putService('updatenote', note);
 
     } else if (field === 'archive') {
       note.archive = status;
-  //  return  this.httpservice.putService('updatenote', note);
     } else if (field === 'close') {
-     // note.close = status;
-     // this.httpservice.putService('updatenote', note);
+
+
     } else if (field === 'reminder') {
-   // return  this.httpservice.putService('updatenote', note);
+
     }
     return this.httpservice.putService('updatenote', note);
   }
@@ -67,7 +66,8 @@ getAllNotes(): Observable<NoteResponse[]> {
   }
 
   trashNote(note): any {
-return this.httpservice.putService('user/updatenote', note);
+
+return this.httpservice.putService('updatenote', note);
   }
 }
 
