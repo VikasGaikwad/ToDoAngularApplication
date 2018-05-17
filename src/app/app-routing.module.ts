@@ -19,6 +19,8 @@ import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl} f
          {path : '' , redirectTo : 'login', pathMatch : 'full'},
          {path : 'register', component : RegisterComponent},
          { path : 'login' , component : LoginComponent},
+         { path: 'forgotPassword', component: ForgotComponent },
+         { path: 'resetpassword', component: ResetpasswordComponent },
          { path : 'home' , component : HomeComponent,
          canActivate: [AuthGuard],
             children: [
@@ -30,9 +32,6 @@ import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl} f
                         { path: 'label', component: LabelNavComponent}
                   ]
       },
-      { path: 'forgotPassword', component: ForgotComponent },
-      { path: 'resetpassword', component: ResetpasswordComponent }
-
 ];
 
 @NgModule({

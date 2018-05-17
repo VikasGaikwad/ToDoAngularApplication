@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../http.service';
-import {UserService} from '../../service/user.service';
+import { UserService } from '../../service/user.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -8,13 +8,27 @@ import {UserService} from '../../service/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  // it will take any type of data
   model: any = {};
-  constructor(private http: HttpService, private userservice: UserService) { }
+  response: any = {};
+
+  // ===============================================================
+
+  constructor(
+    private userservice: UserService
+              ) { }
+
+  // ===============================================================
+
   register(): void {
+
     console.log('register', this.model);
-    this.userservice.registerUser(this.model);
-    }
+    this.userservice.register(this.model).subscribe(response => {
+      this.response = response;
+    });
+
+  }
+
+  // ===============================================================
 
   ngOnInit() {
 

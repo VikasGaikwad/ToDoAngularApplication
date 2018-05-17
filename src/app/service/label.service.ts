@@ -9,11 +9,11 @@ export class LabelService {
   // -------------------------------------------------------------------
 
   addLabelOnNote(labelId, noteId, checked) {
-    return this.httpservice.putService1('addLabelOnNotes/' + labelId + '/' + noteId + '/' + checked);
+    return this.httpservice.putService('addLabelOnNotes/' + labelId + '/' + noteId + '/' + checked);
   }
   // -------------------------------------------------------------------
   createLabel(model) {
-    return this.httpservice.postService('addlabel', model);
+    return this.httpservice.postService('user/addlabel', model);
   }
   // -------------------------------------------------------------------
 
@@ -24,8 +24,10 @@ export class LabelService {
   // -------------------------------------------------------------------
 
   updateLabel(label) {
-    return this.httpservice.postService('updatelabel', label);
+    return this.httpservice.postService('user/updatelabel', label);
   }
   // -------------------------------------------------------------------
-
+readLabel() {
+return this.httpservice.getService('user/readLabel');
+}
 }

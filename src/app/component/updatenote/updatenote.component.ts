@@ -20,7 +20,8 @@ notes: NoteResponse[];
 
 
 constructor(@Inject(MAT_DIALOG_DATA) private data: NoteResponse,
-private commonService: HttpService, private noteService: NoteserviceService,
+private commonService: HttpService,
+private noteService: NoteserviceService,
 public dialogRef: MatDialogRef<UpdatenoteComponent>) { }
 
 ngOnInit() {
@@ -29,7 +30,7 @@ this.description.nativeElement.innerHTML = this.data.description;
 }
 
 refreshNote(): void {
-this.commonService.getService('readallnotes').subscribe(data => {
+this.commonService.getService('user/readallnotes').subscribe(data => {
 this.notes = data.body;
 
 });
@@ -40,7 +41,7 @@ console.log('formValue', this.data);
 this.commonService.putService('updatenote', this.data)
 .subscribe(data => {
 console.log(data);
-// this.refreshNote();
+   this.refreshNote();
 this.dialogRef.close();
 }) ;
 }
@@ -51,4 +52,6 @@ deleteImage(note): void {
   console.log('deleting image from noteId - ', note);
 
 }
+
+
 }

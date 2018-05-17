@@ -13,13 +13,14 @@ import { CollaboratorComponent } from '../collaborator/collaborator.component';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component';
 import { Subscription } from 'rxjs/Subscription';
 import { NotesComponent } from '../notes/notes.component';
+import { CollaboratorResponse } from '../../collaboratorResponse';
 
 @Component({
   selector: 'app-common-code',
   templateUrl: './common-code.component.html',
   styleUrls: ['./common-code.component.css']
 })
-export class CommonCodeComponent implements OnInit, OnDestroy {
+export class CommonCodeComponent implements OnInit {
 
   @Input() note: any;
   labels: LabelResponse[];
@@ -30,6 +31,7 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
   response: any = {};
   notes: NoteResponse[];
   fileToUpload: File = null;
+  collaborator: CollaboratorResponse;
  // -------------------------------------------------------------------
  unPin = '/assets/icons/unPin.svg';
  pinSVG = '/assets/pin.svg';
@@ -74,7 +76,7 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
   private http: HttpService,
   public dialog: MatDialog,
   private noteService: NoteserviceService,
-  private labelObj: LabelService,
+  private labelServiceObj: LabelService,
   private uploadService: UploadService) {
 
   }
@@ -84,34 +86,31 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
 
 
  ngOnInit() {
-   this.todo = this.http.getService('readallnotes')
-               .subscribe(response => {
-               this.notes = response.body;
-               this.notes.forEach(note => {
-               note.imageString = 'data:image/jpg;base64,' + note.image;
-     });
 
-     console.log(this.notes);
-   });
  }
 
 
  updateNote(note, status, field) {
 
-   this.noteService.updateNote(note, status, field);
+  this.todo = this.noteService.updateNote(note, status, field).subscribe(response => {
+     console.log('successfully trashed...');
+     this.noteService.reloadNotes();
+   });
  }
- // -------------------------------------------------------------------
-// isPinnedOrNot(note, status, pin) {
+//  trashnote(note, status): void {
+//   note.archive = status;
+//   console.log('trashnote', note);
+//   this.http.putService('updatenote', note)
+//   .subscribe(response => {
+//     this.response = response;
 
-// if (status === true) {
-//   this.unPinNote(note, true, pin);
-
-// } else {
-//   this.pinNote(note, false, pin);
+//     console.log(response);
+// });
 // }
-// }
 
- reminder(note, day): void {
+
+ reminder(note, day, field): void {
+
    if (day === 'Today') {
      this.today = new Date();
      this.today.setHours(20);
@@ -135,10 +134,11 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
      note.reminder = this.today;
    } else if (day === 'null') {
      note.reminder = null;
+    // this.updateNote();
    }
-   this.http.putService('updatenote', note).subscribe(response => {
+   this.noteService.updateNote(note, status, field).subscribe(response => {
      this.response = response;
-     console.log(response);
+     this.noteService.reloadNotes();
    });
  }
 
@@ -171,44 +171,46 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
 
  readLabels() {
    console.log('message---------');
-   this.http.getServiceLabel('readLabel').subscribe(res => {
+   this.labelServiceObj.readLabel().subscribe(res => {
      this.labels = res.body;
-     console.log('data', this.labels);
+     console.log('label data', this.labels);
+     this.refreshNote();
    });
  }
 
  // -------------------------------------------------------------------
- refreshNote(path) {
+ refreshNote() {
+   this.noteService.reloadNotes();
   //  this.http.getService('readallnotes').subscribe(response => {
   //    this.notes = response.body;
   //  });
  }
 
 
- createnote(): void {
-   console.log('createnote', this.model);
+//  createnote(): void {
+//    console.log('createnote', this.model);
 
-   this.http.postService('createnote', this.model)
-     .subscribe(response => {
-       this.response = response;
-       console.log(response);
-       this.refreshNote('readallnotes');
-     });
- }
+//    this.http.postService('createnote', this.model)
+//      .subscribe(response => {
+//        this.response = response;
+//        console.log(response);
+//        this.refreshNote();
+//      });
+//  }
 
 
  deleteImage(note): void {
 
    note.image = null;
    this.noteService.deleteImage(note);
-   console.log('deleting image from noteId - ', note);
+   console.log('deleting image from noteId - ', note.noteId);
 
  }
  // -------------------------------------------------------------------
 
 
  addLabelOnNote(labelId, noteId, checked) {
-   this.labelObj.addLabelOnNote(labelId, noteId, checked)
+   this.labelServiceObj.addLabelOnNote(labelId, noteId, checked)
      .subscribe(response => {
        console.log('successfull', response.body);
 
@@ -234,25 +236,8 @@ export class CommonCodeComponent implements OnInit, OnDestroy {
      width: '500px'
    });
  }
- ngOnDestroy(): void {
-  this.todo.unsubscribe();
-}
 
-pinUnpin(note) {
-  if (note.pin === false) {
-    this.pinNote(note, 'true', 'pin').subscribe(response => {
-      this.response = response;
-      console.log(response);
-     // this.http.getAll('readallnotes');
-    });
-  } else {
-    this.pinNote(note, 'false', 'pin').subscribe(response => {
-      this.response = response;
-      console.log(response);
-     // this.http.getAll('readallnotes');
-    });
-  }
-}
+
 image (note) {
   if (note.pin) {
     return this.unPin;
@@ -260,22 +245,42 @@ image (note) {
     return this.pinSVG;
   }
 }
- status(note, status, field): void {
- if (status === 'false') {
-  return this.unPinNote(note, 'false', field);
-   } else if (status === 'true') {
-  return this.pinNote(note, 'true', field);
-   }
- }
- pinNote(note, status, field): any {
-  return this.noteService.updateNote(note, status, field);
+//  ngOnDestroy(): void {
+//   this.todo.unsubscribe();
+// }
+pinUnpin(note) {
+
+  if (note.pin === false) {
+    this.unPinNote(note);
+  } else {
+    this.pinNote(note);
+  }
+}
+
+
+
+ pinNote(note): any {
+   note.pin = false;
+  return this.noteService.updateNote(note).subscribe(response => {
+    this.response = response;
+    this.refreshNote();
+    });
 
 }
-unPinNote(note, status, field) {
-  this.noteService.updateNote(note, status, field).subscribe(response => {
+unPinNote(note) {
+  note.pin = true;
+  this.noteService.updateNote(note).subscribe(response => {
     this.response = response;
     console.log(response);
-    this.refreshNote('getNotes');
+    this.refreshNote();
   });
+}
+deleteLabel(labelId): void {
+  this.model = labelId;
+  console.log(labelId);
+
+this.labelServiceObj.deleteLabel(labelId).subscribe(response => {
+console.log('label id----', labelId);
+});
 }
 }

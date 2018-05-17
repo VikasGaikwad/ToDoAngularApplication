@@ -1,9 +1,9 @@
-<mat-card fxFlex="265px" [style.background]="note.color">
+<mat-card fxFlex="265px" fx [style.background]="note.color">
   <div *ngIf="note.image">
     <img [src]="note.imageString" width="235px" />
     <mat-icon (click)="deleteImage(note)">close</mat-icon>
   </div>
-  <div (click)="pinUnpin(note)" style="margin-left: 165px;">
+  <div (click)="pinUnpin(note,'pin')" style="margin-left: 165px;">
     <img [src]=image(note)>
 
   </div>
@@ -22,7 +22,7 @@
       <mat-chip-list>
         <mat-chip selected="true" class="chip">
           <label>{{note.reminder | date:'MMM dd,y, hh:mm a'}}</label>
-          <mat-icon (click)="updateNote(note, null, 'reminder')">close</mat-icon>
+          <mat-icon (click)="reminder(note,'null','reminder')">close</mat-icon>
 
         </mat-chip>
       </mat-chip-list>
@@ -38,7 +38,7 @@
           <mat-chip selected="true">
 
             <label>{{label.labelName}}</label>
-            <mat-icon (click)="updateNote(label, false,'close')">close</mat-icon>
+            <mat-icon (click)="deleteLabel(label.labelId)">close</mat-icon>
           </mat-chip>
         </mat-chip-list>
       </div>
@@ -71,9 +71,9 @@
     <mat-chip>Shared from:{{note.collaboratorName}}</mat-chip>
     </mat-chip-list>
     </div>
-<!-- 
 
-  <div *ngIf="note.collaboratorName!=null">
+
+  <!-- <div *ngIf="note.collaboratorName!=null">
     <div fxLayout="row" fxLayoutGap="5px">
       <div>
         <mat-chip-list>
@@ -92,7 +92,7 @@
 
   <div fxLayout="row" fxLayoutAlign="end end">
     <mat-menu #appMenu="matMenu">
-      <button mat-menu-item (click)="updateNote(note,'true', 'trash')">Delete note</button>
+      <button mat-menu-item (click)="updateNote(note, 'true', 'trash')">Delete note</button>
       <div>
         <button type="submit" mat-menu-item [matMenuTriggerFor]="label" (click)="readLabels()">
           <span>change label</span>
@@ -186,4 +186,10 @@
     </div>
 
   </div>
+  <!-- <div> 
+      <button mat-icon-button (click)="trashnote(note,'false')">
+          <mat-icon>unarchive</mat-icon>
+      </button>
+</div>   -->
 </mat-card>
+

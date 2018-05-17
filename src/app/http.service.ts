@@ -6,22 +6,20 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { NoteResponse } from './noteResponse';
 import { LabelResponse } from './labelResponse';
 import { ImageResponse } from './imageResponse';
-import { environment} from '../environments/environment';
-//  The @Injectable() decorator tells Angular that this service
-//  might itself have injected dependencies.
+import { environment } from '../environments/environment';
 import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
 export class HttpService {
-  private allLabelSubject = new Subject<any>();
-// search
-private searchSubjcet = new Subject<any>();
-searchObservable$ = this.searchSubjcet.asObservable();
+    private allLabelSubject = new Subject<any>();
+  // search
+    private searchSubjcet = new Subject<any>();
+    searchObservable$ = this.searchSubjcet.asObservable();
 
-  urlPath: string;
-  httpOptions = {
-    headers : new HttpHeaders({
+    urlPath: string;
+    httpOptions = {
+    headers: new HttpHeaders({
       'Content-Type': 'application/json'
     }),
     observe: 'response' as 'response'
@@ -36,35 +34,17 @@ searchObservable$ = this.searchSubjcet.asObservable();
     console.log(localStorage.getItem('Authorization'));
 
     if (localStorage.getItem('Authorization')) {
-      // localStorage.removeItem('Authorization');
-
-      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
+        this.httpOptions.headers = this.httpOptions.headers.set('Authorization', localStorage.getItem('Authorization'));
     }
   }
-  // -------------------------------------------------------------------
-
-  // The HTTP Client POST service sends HTTP POST requests to a trading partner's -
-  // HTTP server via the perimeter server. This service works with the HTTP Client -
-  // Begin service and the HTTP Client End service and through an instance of the HTTP -
-  // Client adapter.
-
-  postServiceLogin(loginUrl, userObj): Observable<any> {
-    this.urlPath = environment.base_Url.concat(loginUrl);
-    return this.http.post<any>(this.urlPath, userObj, this.httpOptions);
-  }
-  // -------------------------------------------------------------------
-
-  // postserviceLabel(createLabel, obj): Observable<any> {
-  //   this.urlPath = environment.noteUrl.concat('addlabel');
-  //   return this.http.post<any>(this.urlPath, obj, this.httpOptions);
-  // }
 
   // -------------------------------------------------------------------
+
   loadAll(path): void {
     this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     this.http.get<any>(this.urlPath, this.httpOptions).toPromise().then((res) => {
-    this.allLabelSubject.next(res);
+      this.allLabelSubject.next(res);
     });
   }
 
@@ -74,20 +54,20 @@ searchObservable$ = this.searchSubjcet.asObservable();
   }
 
   getService(path): Observable<any> {
-    this.urlPath = environment.noteUrl.concat(path);
+    this.urlPath = environment.base_Url.concat(path);
     this.appendToken();
-    return this.http.get<NoteResponse[]>(this.urlPath, this.httpOptions);
+    return this.http.get<any>(this.urlPath, this.httpOptions);
   }
   // -------------------------------------------------------------------
 
-  getServiceLabel(path): Observable<any> {
-    this.urlPath = environment.noteUrl.concat(path);
-    this.appendToken();
-    return this.http.get<LabelResponse[]>(this.urlPath, this.httpOptions);
-  }
+  // getServiceLabel(path): Observable<any> {
+  //   this.urlPath = environment.noteUrl.concat(path);
+  //   this.appendToken();
+  //   return this.http.get<LabelResponse[]>(this.urlPath, this.httpOptions);
+  // }
   // -------------------------------------------------------------------
 
-  putService(path, note): Observable<any> {
+  putService(path, note?): Observable<any> {
     this.urlPath = environment.noteUrl.concat(path);
     this.appendToken();
     return this.http.put<any>(this.urlPath, note, this.httpOptions);
@@ -105,18 +85,18 @@ searchObservable$ = this.searchSubjcet.asObservable();
   // -------------------------------------------------------------------
 
   postService(path, obj): Observable<any> {
-    this.urlPath = environment.noteUrl.concat(path);
-  //  this.appendToken();
-    return this.http.post<any>(this.urlPath, obj, this.httpOptions );
+    this.urlPath = environment.base_Url.concat(path);
+    return this.http.post<any>(this.urlPath, obj, this.httpOptions);
+
   }
   // -------------------------------------------------------------------
 
-  putService1(path): Observable<any> {
+  // putService1(path): Observable<any> {
 
-    this.urlPath = environment.noteUrl.concat(path);
-    this.appendToken();
-    return this.http.put<any>(this.urlPath, {}, this.httpOptions);
-  }
+  //   this.urlPath = environment.noteUrl.concat(path);
+  //   this.appendToken();
+  //   return this.http.put<any>(this.urlPath, {}, this.httpOptions);
+  // }
   // -------------------------------------------------------------------
 
   // putImageService(path, images): Observable<any> {
@@ -145,10 +125,10 @@ searchObservable$ = this.searchSubjcet.asObservable();
   }
   deleteImageService(path, noteId): Observable<any> {
     this.urlPath = environment.noteUrl.concat(path);
-    return this.http.delete<any>(this.urlPath,  this.httpOptions);
+    return this.http.delete<any>(this.urlPath, this.httpOptions);
   }
   onDataChangeInSearch(data: any) {
     console.log(data);
     this.searchSubjcet.next(data);
-    }
+  }
 }

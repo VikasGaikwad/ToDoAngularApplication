@@ -29,18 +29,22 @@ collaborators: CollaboratorResponse [];
 
   ngOnInit() {
     console.log('data', this.data);
-    this.http.getService('getuser').subscribe(response => {
+    this.getuser();
+    this.getAllNotes();
+
+  }
+  getuser() {
+    this.http.getService('user/getuser').subscribe(response => {
       this.user = response.body;
       console.log(this.collaborators);
       });
-
-      this.noteService.getAllNotes().subscribe(res => {
-        this.notes = res;
-        console.log('notes in side collaborator', this.notes);
-        });
-
   }
-
+  getAllNotes() {
+    this.noteService.getAllNotes().subscribe(res => {
+      this.notes = res;
+      console.log('notes in side collaborator', this.notes);
+      });
+  }
 
 // ngOnDestroy(): void {
 // this.todo.unsubscribe();
@@ -54,7 +58,7 @@ this.collaboratorService.savecollaborator(noteId, this.model);
 addcollaborator(): void {
   this.model.noteId = this.data.noteId;
   console.log(this.model);
-  const query = 'addcollaborator?sharedId=' + this.model.sharedUser + '&noteId=' + this.model.noteId;
+  const query = 'user/addcollaborator?sharedId=' + this.model.sharedUser + '&noteId=' + this.model.noteId;
   this.collaboratorService.savecollaborator(query, {});
   }
 

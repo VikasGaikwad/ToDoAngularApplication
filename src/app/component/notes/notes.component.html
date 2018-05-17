@@ -25,7 +25,7 @@
  
     <div>Pinned</div>
    <div class="class-container" fxLayoutAlign="center center">
-      <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex="900px" fxLayoutGap="20px">
         <div *ngFor="let note of notes|searchFilter:searchText" class={{statusClass}}>
             <div *ngIf="note.trash===false && note.archive===false && note.pin===true">
                 <app-common-code [note]="note"></app-common-code>
@@ -36,11 +36,13 @@
    
     <div>Other</div>
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex="900px" fxLayoutGap="20px">
+
         <div *ngFor="let note of notes|searchFilter:searchText">
           <div *ngIf="note.trash===false && note.archive===false && note.pin===false">
-             <div (click)="isPinnedOrNot(note, 'true', 'pin')"></div> 
-            <app-common-code [note]="note"></app-common-code>
+           <app-common-code [note]="note"></app-common-code>
           </div>
+        </div>
         </div>
       </div>
 

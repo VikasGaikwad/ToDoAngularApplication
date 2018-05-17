@@ -3,6 +3,7 @@ import { HttpService } from '../../http.service';
 import { NoteResponse } from '../../noteResponse';
 import { SubscriptionList } from '@angular/flex-layout';
 import { Subscription } from 'rxjs/Subscription';
+import { NoteserviceService } from '../../service/noteservice.service';
 
 @Component({
   selector: 'app-archive',
@@ -12,34 +13,29 @@ import { Subscription } from 'rxjs/Subscription';
 export class ArchiveComponent implements OnInit, OnDestroy {
 response: any = {};
 notes: NoteResponse[];
-  constructor(private http: HttpService ) { }
+  constructor(private http: HttpService , private noteService: NoteserviceService) { }
   todo: Subscription;
   ngOnInit() {
-  this.todo =  this.http.getService('readallnotes').subscribe(response => {
-      this.notes = response.body;
+    this.getNotes();
+  }
+getNotes() {
+  this.todo =  this.noteService.getnotes().subscribe(response => {
+    this.notes = response;
       console.log(this.notes);
       });
-  }
-  ngOnDestroy() {
-    this.todo.unsubscribe();
-  }
+}
 
   trashnote(note, status): void {
     note.archive = status;
     console.log('trashnote', note);
-    this.http.putService('updatenote', note)
-    .subscribe(response => {
-      this.response = response;
-
-      console.log(response);
+    this.noteService.trashNote( note)
+                    .subscribe(response => {
+                        this.response = response;
+                        console.log(response);
   });
   }
 
-  deletenote(noteId): void {
-    this.http.deleteService('deletenote/' + noteId).subscribe(response => {
-    console.log(response);
-    });
-      }
-
-
+  ngOnDestroy() {
+    this.todo.unsubscribe();
+     }
 }

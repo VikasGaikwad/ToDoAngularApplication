@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { LabelResponse } from '../../labelResponse';
 import { Subscription } from 'rxjs/Subscription';
 import { LabelService } from '../../service/label.service';
+import { NoteserviceService } from '../../service/noteservice.service';
 
 @Component({
   selector: 'app-label-nav',
@@ -13,82 +14,59 @@ import { LabelService } from '../../service/label.service';
 
 // -------------------------------------------------------------------
 
-
 export class LabelNavComponent implements OnInit, OnDestroy {
 
   model: any = {};
   @Input() labels: LabelResponse[];
-  // -------------------------------------------------------------------
-
-  constructor(private http: HttpService, public MatRef: MatDialogRef<LabelNavComponent>, private labelObj: LabelService) { }
   todo: Subscription;
-  // -------------------------------------------------------------------
 
+  // -------------------------------------------------------------------
+  constructor(
+    private http: HttpService,
+    public MatRef: MatDialogRef<LabelNavComponent>,
+    private labelServiceObj: LabelService,
+    private noteService: NoteserviceService
+  )   { }
+
+  // -------------------------------------------------------------------
   ngOnInit() {
-   this.todo = this.http.getServiceLabel('readLabel').subscribe(response => {
-      console.log('response', response);
-      this.labels = response.body;
-      console.log('labels:', this.labels);
-    });
+    this.readLabel();
   }
 
 
+  readLabel() {
+    this.todo = this.labelServiceObj.readLabel().subscribe(response => {
+      console.log('response', response);
+      this.labels = response.body;
+      console.log('labels:', this.labels);
+
+    });
+  }
   // -------------------------------------------------------------------
 
-
   createLabel(): void {
-
-    this.todo =  this.labelObj.createLabel(this.model)
+    this.todo = this.labelServiceObj.createLabel(this.model)
       .subscribe(response => {
         console.log('Label Created', response);
-
         this.MatRef.close();
+
       });
   }
   deleteLabel(labelId): void {
     this.model = labelId;
     console.log(labelId);
+    this.labelServiceObj.deleteLabel(labelId).subscribe(response => {
+      console.log('label id----', labelId);
+    });
+  }
 
- this.labelObj.deleteLabel(labelId).subscribe(response => {
- console.log('label id----', labelId);
-  });
-}
-
-updateLabel(label): void {
-this.labelObj.updateLabel(label).subscribe(response => {
-console.log();
-});
- }
+  updateLabel(label): void {
+    this.labelServiceObj.updateLabel(label).subscribe(response => {
+      console.log();
+    });
+  }
 
   ngOnDestroy(): void {
     this.todo.unsubscribe();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
