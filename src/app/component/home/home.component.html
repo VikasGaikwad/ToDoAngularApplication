@@ -1,120 +1,111 @@
+
 <div>
-  <mat-toolbar style="background-color:rgb(255, 217, 0)" appColorTool>
-    <div fxLayout="row">
+    <mat-toolbar style="background-color:rgb(255, 217, 0)" appColorTool>
+            <div fxLayout="row">               
+                <div> 
+                    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon> </button>
+                </div>
+          
+                <div>
+                    fundooNotes
+                </div>
+       <!--sesrch-->
       <div>
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-      </div>
-
-      <div>
-        fundooNotes
-      </div>
-      <!--search-->
-      <div>
-        <form [formGroup]="homeForm">
-          <mat-icon>search</mat-icon>
-          <input type='text' style="height: 46px;width:1600%;" placeholder="Search ..." [formControl]="inputFormControl">
-        </form>
-      </div>
-      <div>
-        <button mat-mini-fab [matMenuTriggerFor]="appMenu" style="background-color: #3f51b5;">
-          <mat-icon>account_circle</mat-icon>
-        </button>
-      </div>
+    <form [formGroup]="homeForm">
+    <mat-icon>search</mat-icon>
+    <input type='text' style="height: 46px;width:1600%;" placeholder="Search ..." [formControl]="inputFormControl"> 
+    </form> 
     </div>
 
-  </mat-toolbar>
-  <mat-menu #appMenu="matMenu">
-    <div fxLayout="row">
-      <mat-icon>account_circle</mat-icon>
-    </div>
-    <div fxLayout="row">
-
-      <div>profile picture</div>
-      <hr>
-      <div>profile summary</div>
-
-    </div>
-    <button mat-raised-button>Add account</button>
-    <button mat-raised-button (click)="signOut()">Sign out</button>
-  </mat-menu>
 
 
+    
+                <div style="margin-left: 258%;">
+                    <button mat-mini-fab [matMenuTriggerFor]="appMenu">User</button>
+                </div>
+            </div>
+    </mat-toolbar>
 
 
-
-
-
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav opened mode="side">
-      <!-- A routerLink attribute is set to "/notes", 
-                the string that the router matches to the route to NotesComponent -->
-      <div>
-
-        <a mat-button routerLink="/home/notes">
-          <mat-icon>lightbulb_outline</mat-icon> Notes</a>
-
-      </div>
-
-      <div>
-        <a mat-button routerLink="/home/trash">
-          <mat-icon>delete</mat-icon>Trash</a>
-      </div>
-
-      <div>
-        <a mat-button routerLink="/home/archive">
-          <mat-icon>archive</mat-icon>Archive</a>
-      </div>
-
-      <div>
-        <a mat-button routerLink="/home/reminder">
-          <mat-icon>touch_app</mat-icon>Reminders</a>
-
-      </div>
-      <div>
-
-        <button mat-menu-item>
-          <span>Labels</span>
-          <button mat-button type="submit" (click)="openLabelDialog(label)" style="margin-left:40%;">
-            <b>EDIT</b>
-          </button>
-        </button>
-      </div>
-
-      <div *ngFor="let label of labels">
-        <div>
-          <button mat-menu-item>
-            <mat-icon>label</mat-icon>
-            <span>{{label.labelName}}</span>
-          </button>
+    <mat-menu #appMenu="matMenu" >
+       
+       <!-- <div fxLayout="row">
+           
+               <div>profile picture</div>
+               <hr>
+               <div>profile summary</div>
+           
+       </div> -->
+      
+      
+       <div fxLayout="row" style="padding-top: 115px;padding-bottom: 1px;padding-left: 41px;"> 
+           <div>
+            <button mat-raised-button>create account</button>       
         </div>
-      </div>
-
-      <div>
-        <button mat-menu-item (click)="openLabelDialog(label)">
-          <mat-icon>add</mat-icon>
-          <span>Create new lable</span>
-        </button>
-      </div>
+        <div>
+            <button mat-raised-button (click)="signOut()">SignOut</button>
+        </div>
+       </div>
+    </mat-menu>
 
 
 
-    </mat-sidenav>
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav opened mode="side">
+             <!-- A routerLink attribute is set to "/notes", 
+                the string that the router matches to the route to NotesComponent -->
+            <div>
+               
+                <a mat-button routerLink="/home/notes"><mat-icon>lightbulb_outline</mat-icon> Notes</a>
+              
+            </div>
+
+            <div>                    
+                <a mat-button routerLink="/home/trash"><mat-icon>delete</mat-icon>Trash</a>                
+            </div>
+
+            <div>
+                <a mat-button routerLink="/home/archive"><mat-icon>archive</mat-icon>Archive</a>
+            </div>
+
+            <div>
+                <a mat-button routerLink="/home/reminder" ><mat-icon>touch_app</mat-icon>Reminders</a>
+           
+            </div>
+        <div>
+
+            <button mat-menu-item>
+                <span>Labels</span>
+                <button mat-button type="submit" (click)="openLabelDialog(label)" style="margin-left:40%;">
+                    <b>EDIT</b>
+                </button>              
+            </button>
+        </div>
+
+        <div *ngFor="let label of labels">
+            <div>
+              <button mat-menu-item>
+                <mat-icon>label</mat-icon>
+                <span>{{label.labelName}}</span>
+              </button>
+            </div>
+        </div>
+
+        <div>
+            <button mat-menu-item (click)="openLabelDialog(label)">
+                <mat-icon>add</mat-icon>
+                <span>Create new lable</span>
+            </button>
+        </div>
+
+        
+
+        </mat-sidenav>
 
 
+       
 
-
-    <!-- The <router-outlet> tells the router where to display routed views. -->
-    <router-outlet> </router-outlet>
-  </mat-sidenav-container>
-
+        <!-- The <router-outlet> tells the router where to display routed views. -->
+        <router-outlet> </router-outlet>
+    </mat-sidenav-container>
 </div>
-
-
-<!-- 
-<div class="toolitems">
-    <button mat-icon-button (click)="refresh()">
-      <mat-icon>refresh</mat-icon>
-    </button>
-  </div> -->
