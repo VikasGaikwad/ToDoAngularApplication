@@ -2,12 +2,14 @@
 <div>
     <div *ngIf="data.image">
         <img [src]="data.imageString" class="img-class"/>
-        <mat-icon (click)="deleteImage(note)">close</mat-icon>
+        <mat-icon (click)="deleteImage(note)">delete</mat-icon>
       </div>
 <div #title id="update-title" contenteditable="true" data-text="title" name="title" (input)="data.title=$event.target.innerHTML"></div>
-<div #description id="update-description" contenteditable="true" data-text="description" name="description" (input)="data.description=$event.target.innerHTML"></div>
+<div #description id="update-description" contenteditable="true" class="line-height" data-text="description" name="description" (input)="data.description=$event.target.innerHTML"></div>
 
 <div>
   <button  (click)="updateNote(note)">close</button>
 </div>
 </div>
+
+<!-- <input type="text" data-text='title' placeholder="Title" name="title" [(ngModel)]="model.title" matInput style="border: none;outline: none"> -->

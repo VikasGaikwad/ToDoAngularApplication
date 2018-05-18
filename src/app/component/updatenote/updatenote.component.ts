@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
  import { HttpService } from '../../http.service';
  import { NoteResponse } from '../../noteResponse';
  import { NoteserviceService } from '../../service/noteservice.service';
+import { ImageResponse } from '../../imageResponse';
 
 @Component({
   selector: 'app-updatenote',
@@ -17,7 +18,7 @@ export class UpdatenoteComponent implements OnInit {
 
 model: any = {};
 notes: NoteResponse[];
-
+object: ImageResponse[];
 
 constructor(@Inject(MAT_DIALOG_DATA) private data: NoteResponse,
 private commonService: HttpService,
@@ -36,7 +37,7 @@ this.notes = data.body;
 });
 }
 
-updateNote(): void {
+updateNote(note): void {
 console.log('formValue', this.data);
 this.commonService.putService('updatenote', this.data)
 .subscribe(data => {

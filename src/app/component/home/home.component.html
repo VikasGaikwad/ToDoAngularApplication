@@ -1,6 +1,6 @@
 
 <div>
-    <mat-toolbar style="background-color:rgb(255, 217, 0)" appColorTool>
+    <mat-toolbar style="background-color:darkslategray" appColorTool>
             <div fxLayout="row">               
                 <div> 
                     <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon> </button>
@@ -50,8 +50,8 @@
 
 
 
-    <mat-sidenav-container>
-        <mat-sidenav #sidenav opened mode="side">
+    <mat-sidenav-container class="navigation">
+        <mat-sidenav #sidenav opened mode="side" style="margin-top: 67px;" >
              <!-- A routerLink attribute is set to "/notes", 
                 the string that the router matches to the route to NotesComponent -->
             <div>
@@ -76,7 +76,7 @@
 
             <button mat-menu-item>
                 <span>Labels</span>
-                <button mat-button type="submit" (click)="openLabelDialog(label)" style="margin-left:40%;">
+                <button mat-button type="submit" (click)="openLabelDialog(label)">
                     <b>EDIT</b>
                 </button>              
             </button>

@@ -17,3 +17,7 @@
   width: 200px;
   padding: 80px;
 }
+.navigation{
+
+  position: inherit;
+}

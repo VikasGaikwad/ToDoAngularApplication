@@ -263,12 +263,9 @@ unPinNote(note) {
     this.refreshNote();
   });
 }
-deleteLabel(labelId): void {
-  this.model = labelId;
-  console.log(labelId);
-
-this.labelServiceObj.deleteLabel(labelId).subscribe(response => {
-console.log('label id----', labelId);
+deleteLabel(labelId, noteId): void {
+  console.log('deleting label id ---', labelId, '& noteId---', noteId );
+this.labelServiceObj.deleteLabelOnNote(labelId, noteId).subscribe(response => {
 });
 }
 }

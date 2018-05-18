@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {HttpService} from '../../http.service';
 import { NoteResponse } from '../../noteResponse';
 import { Subscription } from 'rxjs/Subscription';
+import { NoteserviceService } from '../../service/noteservice.service';
+
 @Component({
   selector: 'app-reminders',
   templateUrl: './reminders.component.html',
@@ -13,7 +15,10 @@ export class RemindersComponent implements OnInit, OnDestroy {
   response: any = {};
   today: Date;
 
-    constructor(private http: HttpService ) { }
+    constructor(
+      private http: HttpService,
+    private noteService: NoteserviceService
+    ) { }
     todo: Subscription;
     ngOnInit() {
       this.getNotes();
@@ -23,6 +28,13 @@ export class RemindersComponent implements OnInit, OnDestroy {
         this.notes = response.body;
       });
     }
+    updateNote(note, status, field) {
+
+      this.todo = this.noteService.updateNote(note, status, field).subscribe(response => {
+         console.log('successfully trashed...');
+         this.noteService.reloadNotes();
+       });
+     }
 
     // reminder(note, day): void {
     //   debugger;

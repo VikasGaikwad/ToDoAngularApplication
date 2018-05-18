@@ -46,7 +46,7 @@ getAllNotes(): Observable<NoteResponse[]> {
 
 
     } else if (field === 'reminder') {
-
+      note.reminder = null;
     }
     return this.httpservice.putService('updatenote', note);
   }
@@ -54,7 +54,7 @@ getAllNotes(): Observable<NoteResponse[]> {
 
 
   deleteImage(note) {
-    this.httpservice.putService('user/updatenote', note).subscribe(response => {
+    this.httpservice.putService('updatenote', note).subscribe(response => {
       this.response = response;
       console.log(response.body);
     });

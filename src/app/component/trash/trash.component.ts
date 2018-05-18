@@ -28,7 +28,7 @@ export class TrashComponent implements OnInit, OnDestroy {
     this.todo.unsubscribe();
   }
   deletenote(noteId): void {
-    this.http.deleteService('deletenote/' + noteId).subscribe(response => {
+    this.http.deleteService('user/  deletenote/' + noteId).subscribe(response => {
       console.log(response);
     });
   }

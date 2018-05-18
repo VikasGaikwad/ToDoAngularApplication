@@ -77,14 +77,14 @@ export class HttpService {
 
 
   deleteService(path): Observable<any> {
-
-    this.urlPath = environment.noteUrl.concat(path);
+    this.urlPath = environment.base_Url.concat(path);
     this.appendToken();
     return this.http.delete<any>(this.urlPath, this.httpOptions);
   }
   // -------------------------------------------------------------------
 
   postService(path, obj): Observable<any> {
+
     this.urlPath = environment.base_Url.concat(path);
     return this.http.post<any>(this.urlPath, obj, this.httpOptions);
 

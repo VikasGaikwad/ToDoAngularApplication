@@ -1,4 +1,4 @@
-<div>
+<div  style="margin-left: 130px"   > 
   <div fxLayoutAlign="center center" style="margin-top:80px; " (click)="show=!show" *ngIf="!show">
     <mat-card fxFlex="50">
       <div>Take a Note ... </div>
@@ -25,7 +25,7 @@
  
     <div>Pinned</div>
    <div class="class-container" fxLayoutAlign="center center">
-      <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex="900px" fxLayoutGap="20px">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFlex="300px" fxLayoutGap="20px">
         <div *ngFor="let note of notes|searchFilter:searchText" class={{statusClass}}>
             <div *ngIf="note.trash===false && note.archive===false && note.pin===true">
                 <app-common-code [note]="note"></app-common-code>

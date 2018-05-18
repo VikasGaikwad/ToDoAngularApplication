@@ -1,5 +1,5 @@
  <div>
-  <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
+  <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px" style="margin-top: 55px;">
     <div *ngFor="let note of notes">
 
       <div *ngIf="note.reminder!=null">
@@ -20,7 +20,7 @@
               <mat-chip-list>
                 <mat-chip selected="true" class="chip">
                   <label>{{note.reminder | date:'MMM dd,y, hh:mm a'}}</label>
-                  <mat-icon (click)="reminder(note,'null')">close</mat-icon>
+                  <mat-icon (click)="updateNote(note,'null','reminder')">close</mat-icon>
                 </mat-chip>
               </mat-chip-list>
             </div>

@@ -16,10 +16,13 @@ export class LabelService {
     return this.httpservice.postService('user/addlabel', model);
   }
   // -------------------------------------------------------------------
-
+  deleteLabelOnNote(labelId, noteId?) {
+    return this.httpservice.deleteService('user/deletelabelonnote/' + labelId + '/' + noteId);
+  }
+  // -------------------------------------------------------------------
 
   deleteLabel(labelId) {
-    return this.httpservice.deleteService('deletelabel/' + labelId);
+    return this.httpservice.deleteService('user/deletelabel/' + labelId );
   }
   // -------------------------------------------------------------------
 

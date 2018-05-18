@@ -27,7 +27,7 @@ changeColor(url: string) {
 
 
 if (url.indexOf('notes') > -1) {
-this.elRef.nativeElement.style['background-color'] = 'yellow';
+this.elRef.nativeElement.style['background-color'] = 'darkslategray ';
 } else if (url.indexOf('archive') > -1) {
 this.elRef.nativeElement.style['background-color'] = 'MediumSlateBlue ';
 } else if (url.indexOf('reminder') > -1) {

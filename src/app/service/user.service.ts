@@ -23,5 +23,9 @@ export class UserService {
   forgot(model) {
     return this.http.postService('forgotpassword', model);
   }
+  resetPassword(check, model) {
+    return this.http.postService(check, model);
+
+  }
 }
 
