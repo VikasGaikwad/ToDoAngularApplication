@@ -18,13 +18,18 @@ export class CollaboratorComponent implements OnInit {
   model: any = {};
   user: UserResponse;
   dataObj: NoteResponse;
+  todo: Subscription;
   @Input() notes: NoteResponse[];
 collaborators: CollaboratorResponse [];
 
-  constructor(private http: HttpService, private noteService: NoteserviceService,
-     public MatRef: MatDialogRef<CollaboratorComponent>,
-    private collaboratorService: CollaboratorService , @Inject(MAT_DIALOG_DATA) public data: NoteResponse) { }
-    todo: Subscription;
+  constructor(
+      private http: HttpService,
+      private noteService: NoteserviceService,
+      public MatRef: MatDialogRef<CollaboratorComponent>,
+      private collaboratorService: CollaboratorService ,
+      @Inject(MAT_DIALOG_DATA) public data: NoteResponse
+            ) { }
+
 
 
   ngOnInit() {

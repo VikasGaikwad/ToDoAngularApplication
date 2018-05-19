@@ -9,22 +9,23 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./label-note.component.css']
 })
 export class LabelNoteComponent implements OnInit {
-noteObj: NoteResponse[];
+public notes;
 model: any;
 public id;
+public labelId: number;
   constructor(private noteService: NoteserviceService,
               private router: ActivatedRoute,
               ) { }
 
   ngOnInit() {
-    this.noteService.getAllNotes().subscribe(data => {
-      this.noteObj = data;
-
-
+    this.noteService.getAllNotes().subscribe(res => {
+       this.notes = res;
+     // console.log('note array', res.body);
     });
     this.router.params.subscribe(params => {
+      // debugger;
       this.id = +params['id']; // (+) converts string 'id' to a number
+      console.log('note label  component Id :', this.id);
     });
   }
-
 }

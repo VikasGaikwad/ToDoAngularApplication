@@ -7,6 +7,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpService } from '../../http.service';
 import { Subscription } from 'rxjs/Subscription';
 import { CommonCodeComponent } from '../common-code/common-code.component';
+import { UserResponse } from '../../userResponse';
+// import { CollaboratorResponse } from '../../collaboratorResponse';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +17,18 @@ import { CommonCodeComponent } from '../common-code/common-code.component';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   labels: LabelResponse[];
+  user: UserResponse;
   homeForm: FormGroup;
   todo: Subscription;
   commonCodeObject: CommonCodeComponent;
   inputFormControl: FormControl;
+
+  // collaborators: CollaboratorResponse [];
   // private http: HttpService;
   constructor(private builder: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
+    private http: HttpService,
     private commonService: HttpService) {
     this.inputFormControl = new FormControl();
     this.homeForm = this.builder.group({
@@ -36,6 +42,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.readLabel();
     this.searchText();
+    this.getuser();
+  }
+  getuser() {
+    this.http.getService('user/getuser').subscribe(response => {
+      this.user = response.body;
+      });
   }
 readLabel() {
   this.todo = this.commonService.getService('user/readLabel').subscribe(response => {

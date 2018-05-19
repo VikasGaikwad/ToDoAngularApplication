@@ -28,7 +28,27 @@
 
 
     <mat-menu #appMenu="matMenu" >
-       
+<div>
+        <div fxLayout="row"  fxLayoutAlign=" start" style="padding-top: 115px;padding-bottom: 1px;padding-left: 41px;">
+            <div fxLayout="column" style="    margin-top: -96px;">
+                <mat-icon>account_circle</mat-icon>
+            </div>
+            <div fxLayout="column" style=" margin-top: -103px;
+            
+        ">
+                    <div><b>{{user?.username}}</b></div>
+                    <div>{{user?.email}}</div>
+            </div>
+        </div>
+        <div fxLayout="row">
+                <div>
+                        <button mat-raised-button>create account</button>       
+                    </div>
+                    <div style="    padding-left: 54px;">
+                        <button mat-raised-button (click)="signOut()">SignOut</button>
+                    </div>
+        </div>
+    </div>
        <!-- <div fxLayout="row">
            
                <div>profile picture</div>
@@ -36,8 +56,8 @@
                <div>profile summary</div>
            
        </div> -->
-      
-      
+       <!-- <div>{{user?.username}}</div>
+      <div>{{user?.email}}</div>
        <div fxLayout="row" style="padding-top: 115px;padding-bottom: 1px;padding-left: 41px;"> 
            <div>
             <button mat-raised-button>create account</button>       
@@ -45,7 +65,7 @@
         <div>
             <button mat-raised-button (click)="signOut()">SignOut</button>
         </div>
-       </div>
+       </div> -->
     </mat-menu>
 
 

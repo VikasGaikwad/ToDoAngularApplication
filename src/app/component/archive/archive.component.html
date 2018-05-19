@@ -1,9 +1,11 @@
 <div fxLayoutAlign="center center" class="class-container" style="margin-top: 55px;">
             
     <div fxLayout="row wrap"  fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px">
-        <div *ngFor="let note of notes">
-            <div *ngIf="note.trash===false && note.archive===true">
-                <mat-card fxFlex="230px" >
+        <div *ngFor="let note of notes | noteFilter: {pin: false, trash: false, archive: true}"  class={{noteView}}>
+            <!-- <div *ngIf="note.trash===false && note.archive===true"> -->
+                    <app-common-code [note]="note"></app-common-code>
+                <!-- <mat-card fxFlex="230px" >
+
 
                     <mat-card-title><b>{{note.title}}</b></mat-card-title>
                     <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
@@ -26,9 +28,9 @@
                             </div> 
                                               
                         </div>
-                    </mat-card>
-                </div>
-            
+                    </mat-card>-->
+                <!-- </div> -->
+             
         </div>
     </div>
 </div>

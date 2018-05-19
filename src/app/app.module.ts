@@ -58,6 +58,8 @@ import { SearchFilterPipe } from './search-filter.pipe';
 import { AlwaysLogginAuthGuard} from './auth/AuthGuard';
 import { LabelNoteComponent } from './component/label-note/label-note.component';
 import { LabeledNoteFilterPipe } from './labeled-note-filter.pipe';
+import { NoteFilterPipe } from './note-filter.pipe';
+// import { ArchiveFilterPipe } from './archive-filter.pipe';
 // import { HomeNewComponent } from './home-new/home-new.component';
 // MatFormFieldModule container is imported to designinfg forms in login and registration page
 // used to set styles such as the underline, floating label, and hint messages.
@@ -82,7 +84,9 @@ import { LabeledNoteFilterPipe } from './labeled-note-filter.pipe';
     CommonCodeComponent,
     SearchFilterPipe,
     LabelNoteComponent,
-    LabeledNoteFilterPipe
+    LabeledNoteFilterPipe,
+    NoteFilterPipe,
+    // ArchiveFilterPipe
   ],
   imports: [
     CommonModule,

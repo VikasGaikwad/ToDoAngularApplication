@@ -13,11 +13,15 @@ import { NoteserviceService } from '../../service/noteservice.service';
 export class ArchiveComponent implements OnInit, OnDestroy {
 response: any = {};
 notes: NoteResponse[];
+
+
   constructor(private http: HttpService , private noteService: NoteserviceService) { }
   todo: Subscription;
   ngOnInit() {
     this.getNotes();
   }
+
+
 getNotes() {
   this.todo =  this.noteService.getnotes().subscribe(response => {
     this.notes = response;
@@ -25,15 +29,15 @@ getNotes() {
       });
 }
 
-  trashnote(note, status): void {
-    note.archive = status;
-    console.log('trashnote', note);
-    this.noteService.trashNote(note)
-                    .subscribe(response => {
-                        this.response = response;
-                        console.log(response);
-  });
-  }
+  // trashnote(note, status): void {
+  //   note.archive = status;
+  //   console.log('trashnote', note);
+  //   this.noteService.trashNote(note)
+  //                   .subscribe(response => {
+  //                       this.response = response;
+  //                       console.log(response);
+  // });
+  // }
 
   ngOnDestroy() {
     this.todo.unsubscribe();

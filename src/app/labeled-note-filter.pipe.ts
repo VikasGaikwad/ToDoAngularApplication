@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class LabeledNoteFilterPipe implements PipeTransform {
 
   transform(noteArray: Array<any>, labelId: number): any {
+
     if (!noteArray) {
       return [];
     }
@@ -16,7 +17,6 @@ export class LabeledNoteFilterPipe implements PipeTransform {
       return noteObj.labels.some((labeloObj) => {
         return labeloObj.labelId === labelId;
       });
-
-     });
-    }
+    });
   }
+}
