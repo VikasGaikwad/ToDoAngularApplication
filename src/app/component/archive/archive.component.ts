@@ -11,6 +11,8 @@ import { NoteserviceService } from '../../service/noteservice.service';
   styleUrls: ['./archive.component.css']
 })
 export class ArchiveComponent implements OnInit, OnDestroy {
+  noteView: string = localStorage.getItem('class');
+
 response: any = {};
 notes: NoteResponse[];
 
@@ -19,9 +21,16 @@ notes: NoteResponse[];
   todo: Subscription;
   ngOnInit() {
     this.getNotes();
+    this.changeGridCss();
   }
 
+  changeGridCss() {
 
+    this.noteService.getStatus().subscribe((status) => {
+      this.noteView = status ? 'list-view' : 'grid-view';
+      localStorage.setItem('class', this.noteView);
+    });
+  }
 getNotes() {
   this.todo =  this.noteService.getnotes().subscribe(response => {
     this.notes = response;

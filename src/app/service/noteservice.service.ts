@@ -7,6 +7,9 @@ import { Subscriber } from 'rxjs/Subscriber';
 
 @Injectable()
 export class NoteserviceService {
+  // status: boolean = true;
+  status: boolean;
+  private viewSubject = new Subject<any>();
   today: Date;
 path: string;
   response: any = {};
@@ -68,6 +71,13 @@ getAllNotes(): Observable<NoteResponse[]> {
   trashNote(note): any {
 
 return this.httpservice.putService('updatenote', note);
+  }
+  changeView() {
+    this.status = !this.status;
+    this.viewSubject.next(this.status);
+  }
+  getStatus() {
+    return this.viewSubject.asObservable();
   }
 }
 

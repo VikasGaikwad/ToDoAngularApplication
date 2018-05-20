@@ -1,11 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpService } from '../http.service';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class LabelService {
-
+  private labelSubject = new Subject<any>();
+  public labels: Array<any> = [];
   constructor(private httpservice: HttpService) { }
+  // @Output() changeLabel: EventEmitter<Array<any>> = new EventEmitter();
 
+
+  // reloadLabels(): void {
+  //   const path = 'user/readLabel';
+  //   this.httpservice.getService(path)
+  //                       .toPromise()
+  //                         .then((res) => {
+  //                           this.labels = res;
+  //                           this.changeLabel.emit(res);
+  //                           this.labelSubject.next(res);
+  //                         });
+  //  }
   // -------------------------------------------------------------------
 
   addLabelOnNote(labelId, noteId, checked) {

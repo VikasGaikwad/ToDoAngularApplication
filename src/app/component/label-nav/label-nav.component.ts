@@ -5,6 +5,9 @@ import { LabelResponse } from '../../labelResponse';
 import { Subscription } from 'rxjs/Subscription';
 import { LabelService } from '../../service/label.service';
 import { NoteserviceService } from '../../service/noteservice.service';
+import { Observable } from 'rxjs/Observable';
+import { HttpResponse } from '@angular/common/http';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-label-nav',
@@ -15,7 +18,8 @@ import { NoteserviceService } from '../../service/noteservice.service';
 // -------------------------------------------------------------------
 
 export class LabelNavComponent implements OnInit, OnDestroy {
-
+  private allLabelSubject = new Subject<any>();
+  @Input() label: LabelResponse[];
   model: any = {};
   @Input() labels: LabelResponse[];
   todo: Subscription;
@@ -31,8 +35,27 @@ export class LabelNavComponent implements OnInit, OnDestroy {
   // -------------------------------------------------------------------
   ngOnInit() {
     this.readLabel();
+    this.labelServiceObj.readLabel();
   }
-
+  // refreshLabel(): void {
+  //   this.labelServiceObj.readLabel()
+  //                         .toPromise()
+  //                           .then(response => {
+  //                             this.label = response;
+  //                              console.log('Labels fetched successfully..');
+  //                           });
+  // }
+  getAllLabel(): Observable<HttpResponse<any>> {
+    this.loadAllLabel();
+     return this.allLabelSubject.asObservable();
+    }
+    loadAllLabel(): void {
+      const path = 'user/readLabel';
+      this.http.getService(path)
+      .toPromise().then((res) => {
+      this.allLabelSubject.next(res);
+      });
+  }
 
   readLabel() {
     this.todo = this.labelServiceObj.readLabel().subscribe(response => {
@@ -47,7 +70,9 @@ export class LabelNavComponent implements OnInit, OnDestroy {
   createLabel(): void {
     this.todo = this.labelServiceObj.createLabel(this.model)
       .subscribe(response => {
+        this.labelServiceObj.readLabel();
         console.log('Label Created', response);
+        // this.labelServiceObj.reloadLabels();
         this.MatRef.close();
 
       });

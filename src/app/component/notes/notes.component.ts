@@ -24,6 +24,9 @@ import { FormsModule, FormGroup, FormControl, FormBuilder } from '@angular/forms
 // -------------------------------------------------------------------
 
 export class NotesComponent implements OnInit, OnDestroy {
+
+  noteView: string = localStorage.getItem('class');
+
   labels: LabelResponse[];
   object: ImageResponse;
   model: any = {};
@@ -94,8 +97,18 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.readNote();
-
+    this.changeGridCss();
   }
+
+  changeGridCss() {
+
+    this.noteService.getStatus().subscribe((status) => {
+      this.noteView = status ? 'list-view' : 'grid-view';
+      localStorage.setItem('class', this.noteView);
+    });
+  }
+
+
   readNote(): void {
     this.todo = this.noteService.getnotes()
       .subscribe(response => {
@@ -115,10 +128,10 @@ export class NotesComponent implements OnInit, OnDestroy {
   createnote(): void {
     console.log('createnote', this.model);
     this.noteService.createNote(this.model).subscribe(response => {
-        this.response = response;
-        console.log(response);
-        this.refreshNote();
-      });
+      this.response = response;
+      console.log(response);
+      this.refreshNote();
+    });
   }
 
 
@@ -225,9 +238,9 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   // }
   // -------------------------------------------------------------------
-//   refreshLabel() {
-// this.labelObj.reloadLabel();
-//   }
+  //   refreshLabel() {
+  // this.labelObj.reloadLabel();
+  //   }
   // addLabelOnNote(labelId, noteId, checked) {
   //   this.labelObj.addLabelOnNote(labelId, noteId, checked)
   //     .subscribe(response => {

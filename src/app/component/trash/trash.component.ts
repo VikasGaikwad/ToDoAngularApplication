@@ -10,6 +10,8 @@ import { NoteserviceService } from '../../service/noteservice.service';
   styleUrls: ['./trash.component.css']
 })
 export class TrashComponent implements OnInit, OnDestroy {
+  noteView: string = localStorage.getItem('class');
+
   notes: NoteResponse[];
   model: any = {};
   response: any = {};
@@ -21,7 +23,14 @@ export class TrashComponent implements OnInit, OnDestroy {
     // localStorage.getItem('Authorization');
     this.todo = this.http.getService('user/readallnotes').subscribe(response => {
       this.notes = response.body;
-      console.log('trash.component.ts---read all notes');
+      this.changeGridCss();
+    });
+  }
+  changeGridCss() {
+
+    this.noteService.getStatus().subscribe((status) => {
+      this.noteView = status ? 'list-view' : 'grid-view';
+      localStorage.setItem('class', this.noteView);
     });
   }
   ngOnDestroy(): void {

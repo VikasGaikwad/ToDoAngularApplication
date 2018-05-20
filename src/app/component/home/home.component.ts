@@ -8,6 +8,7 @@ import { HttpService } from '../../http.service';
 import { Subscription } from 'rxjs/Subscription';
 import { CommonCodeComponent } from '../common-code/common-code.component';
 import { UserResponse } from '../../userResponse';
+import { NoteserviceService } from '../../service/noteservice.service';
 // import { CollaboratorResponse } from '../../collaboratorResponse';
 
 @Component({
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private router: Router,
     public dialog: MatDialog,
     private http: HttpService,
+    private noteServiceObj: NoteserviceService,
     private commonService: HttpService) {
     this.inputFormControl = new FormControl();
     this.homeForm = this.builder.group({
@@ -82,5 +84,8 @@ readLabel() {
 
   ngOnDestroy(): void {
     this.todo.unsubscribe();
+  }
+  viewlist() {
+    this.noteServiceObj.changeView();
   }
 }
