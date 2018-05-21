@@ -30,6 +30,7 @@ notes: NoteResponse[];
       this.noteView = status ? 'list-view' : 'grid-view';
       localStorage.setItem('class', this.noteView);
     });
+
   }
 getNotes() {
   this.todo =  this.noteService.getnotes().subscribe(response => {

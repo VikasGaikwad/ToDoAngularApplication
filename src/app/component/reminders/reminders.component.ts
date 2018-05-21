@@ -10,6 +10,7 @@ import { NoteserviceService } from '../../service/noteservice.service';
   styleUrls: ['./reminders.component.css']
 })
 export class RemindersComponent implements OnInit, OnDestroy {
+  noteView: string = localStorage.getItem('class');
   notes: NoteResponse[];
   model: any = {};
   response: any = {};
@@ -22,6 +23,15 @@ export class RemindersComponent implements OnInit, OnDestroy {
     todo: Subscription;
     ngOnInit() {
       this.getNotes();
+      this.changeGridCss();
+    }
+
+    changeGridCss() {
+
+      this.noteService.getStatus().subscribe((status) => {
+        this.noteView = status ? 'list-view' : 'grid-view';
+        localStorage.setItem('class', this.noteView);
+      });
     }
     getNotes() {
       this.todo = this.http.getService('user/readallnotes').subscribe(response => {

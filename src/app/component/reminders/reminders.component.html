@@ -1,10 +1,17 @@
- <div>
+<div>
   <div fxLayout="row wrap" fxLayoutAlign="center center" fxFlex="900px" fxLayoutGap="20px" style="margin-top: 55px;">
     <!-- <div *ngFor="let note of notes|noteFilter: {pin: false, trash: false, archive: true} " class={{noteView}}> -->
-          <div *ngFor="let note of notes|noteFilter: {pin: false, trash: false, archive: true} " class={{noteView}}>
+    <div *ngFor="let note of notes" class={{noteView}}>
+      <div *ngIf="note.reminder!=null">
+        <app-common-code [note]="note"></app-common-code>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <!-- <app-common-code [note]="note"></app-common-code> -->
-      <!-- <div *ngIf="note.reminder!=null">
+
+<!-- <app-common-code [note]="note"></app-common-code> -->
+<!-- <div *ngIf="note.reminder!=null">
         <mat-card fxFlex="265px">
 
           <mat-card-title>
@@ -31,7 +38,3 @@
           
         </mat-card>
       </div> -->
-
-    </div>
-  </div>
-</div> 
